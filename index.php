@@ -7,6 +7,8 @@ Controller sẽ trỏ tới Model->DB để lấy dữ liệu hiện -> View
 <?php
 require "./Core/Database.php";
 require "./Controllers/BaseController.php"; 
+require "./Models/BaseModel.php";
+
 
 
 //Giong codeigniter

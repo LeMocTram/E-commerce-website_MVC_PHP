@@ -1,26 +1,23 @@
 
 <?php
 
-abstract class Database{
+ class Database{
 
     const HOST = "localhost";
     const USERNAME = "root";
     const PASSWORD = "";
-    const DATABASE = "webphp";
-    private $connect;
+    const DB_NAME = "webphp";
     
-    abstract function connectToDatabase(){
+    public function connectToDatabase(){
        
-
         // Create connection
-        $this->connect = new mysqli(self::HOST, self::USERNAME, self::PASSWORD, self::DATABASE);
+        $connect = new mysqli(self::HOST, self::USERNAME, self::PASSWORD, self::DB_NAME);
 
         // Check connection
-        if ($this->connect->connect_error) {
-            die("Connection failed: " . $this->connect->connect_error);
+        if ($connect->connect_error) {
+            die("Connection failed: " . $connect->connect_error);
         }
-
-        return $this->connect;
+        return $connect;
     }
 }
    

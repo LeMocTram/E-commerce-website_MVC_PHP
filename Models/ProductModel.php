@@ -1,33 +1,14 @@
 <h1>ProductModel</h1>
 <?php
-class ProductModel{
+class ProductModel extends BaseModel{
     const TABLE = 'products';
-
-    public function getAll(){
-        return __METHOD__;
-    }
-    
-    public function findById($id){
-        return [
-            ['id'=>'1',
-            'name'=>'iphone 15'],
-            ['id'=>'2',
-            'name'=>'iphone 15'],
-            ['id'=>'3',
-            'name'=>'iphone 15'],
-            ['id'=>'4',
-            'name'=>'iphone 15'],
-            ['id'=>'5',
-            'name'=>'iphone 15'],
-            
-        ];
-    }
-    public function delete(){
-        return  __METHOD__;
+    public function getAllProducts($select=['*'],$orderBy=[],$limit=15){
+       return $this->getAllData(self::TABLE,$select,$orderBy,$limit);
     }
 
-
-
+    public function storeProduct($data){
+        return $this->create(self::TABLE,$data);
+    }
 }
 
 ?>

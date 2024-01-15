@@ -1,37 +1,30 @@
 <?php
 class CategoryController extends BaseController {
+    private $categoryModel;
+    
+    public function __construct(){
+        $this->loadModel('CategoryModel');
+        $this->categoryModel = new CategoryModel;
+
+    }
     
     public function index(){
-        $pageTilte= 'Hello Category****';
-        $categories=[
-            [
-                'id'=>1,
-                'name'=>'Laptop',
-            ],
-            [
-                'id'=>2,
-                'name'=>'desktop',
-            ],
-            [
-                'id'=>3,
-                'name'=>'tablet',
-            ],
-            [
-                'id'=>4,
-                'name'=>'phone',
-            ]
-        ];
+        $selectColumn=['id','name'];
+        $order=['column'=>'id','order'=>'asc'];
+        $category= $this->categoryModel->getAllCategories($selectColumn,$order);
 
-        return $this->loadview('frontend.categories.index',[
-            "pageTilte"=> $pageTilte,
-            "categories"=> $categories
-        ]);// trỏ tới view  required
+        return $this->loadview('frontend.categories.index',['category'=>$category]);// trỏ tới view  required
         // return include './Views/frontend/products/index.php';
     }
-
     public function show(){
-        echo __METHOD__;
+        $id = $_GET['id'];
+        $category= $this->categoryModel->findCategoryById($id);
+        echo '<pre>';
+        print_r($category);
+        // return $this->loadview('frontend.categories.index',['category'=>$category]);// trỏ tới view  required
+        // return include './Views/frontend/products/index.php';
     }
+ 
 }
 
 
