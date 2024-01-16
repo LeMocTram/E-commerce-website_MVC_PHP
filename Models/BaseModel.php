@@ -17,7 +17,7 @@ class BaseModel extends Database {
             $sql = "SELECT ${column} FROM ${table} ORDER BY ${orderByString} LIMIT ${limit}";
         }else{
             $sql = "SELECT ${column} FROM ${table} LIMIT ${limit}";
-            die($sql);
+            // die($sql);
         }
         $query = $this->_query($sql);
         $data=[];
@@ -27,6 +27,26 @@ class BaseModel extends Database {
         }
         return $data;
        
+    }
+    //findbyid
+    public function findByCategoryId($table,$category_id){
+        $sql= "SELECT * FROM ${table} WHERE category_id = ${category_id} LIMIT 3";
+        echo $sql;
+        $query = $this->_query($sql);
+        $data=[];
+        //Mỗi lần lấy ra được 1 bản ghi thông qua câu lệnh mysqli_fetch_assoc($query)
+        while($row = mysqli_fetch_assoc($query)){
+            array_push($data,$row);
+             echo'<pre>';
+
+            print_r($data) ;
+        }
+        return $data;
+        // echo var_dump($data);
+            // echo'<pre>';
+
+            // print_r($data) ;
+
     }
 
     public function findById($table,$id){
@@ -41,25 +61,35 @@ class BaseModel extends Database {
         $values = array_map(function($values){
 	    return "'" . $values . "'";},array_values($data));
 
-        echo $newValues= implode(",",$values);
-        echo '<br>';
+        $newValues= implode(",",$values);
         $sql = "INSERT INTO ${table} (${columns}) VALUES (${newValues})" ;
         echo $sql;
-    //    if ($connect->query($sql) === TRUE) {
-    //         echo "New record created successfully";
-    //     } else {
-    //         echo "Error: " . $sql ;
-    //     }
-
+        // $this->_query($sql);
+            
 
 
     }
     // update data
-    public function update(){
+    public function update($table,$id,$data=[]){
+        // echo $newValues= implode(",",$values);
+        $dataSets=[];
+        // print_r($data);
+        foreach($data as $key => $val){
+                array_push($dataSets, "$key= '" . $val . "'");
+        }
+        $newData=implode(",",$dataSets);
+        $sql = "UPDATE ${table} SET ${newData} WHERE id = ${id}";
+        // echo $sql;
+        // $this->_query($sql);
+
 
     }
     //Delete data
-    public function delete(){
+    public function delete($table,$id){
+
+        $sql="DELETE FROM ${table} WHERE id = ${id}";
+        echo $sql;
+        $this->_query($sql);
 
     }
 

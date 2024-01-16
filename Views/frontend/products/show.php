@@ -1,4 +1,5 @@
 <?php
-// echo '<pre>';
-// print_r($product);
+
+echo '<pre>';
+
 ?>

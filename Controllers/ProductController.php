@@ -13,7 +13,7 @@ class ProductController extends BaseController {
     }
     
     public function index(){
-        $selectColumn=['id','name','image','price','code'];
+        $selectColumn=['id','name','image','price'];
         $order=['column'=>'id','order'=>'asc'];
         $product =  $this->productModel->getAllProducts($selectColumn,$order);
 
@@ -21,21 +21,40 @@ class ProductController extends BaseController {
         // return include './Views/frontend/products/index.php';
     }
 
-    public function storeProduct(){
+    public function store(){
         $data = [
             'name'=> 'ABC',
             'image'=>NULL,
             'price'=>'1500000',
-            'code'=>'4aa4asdad'
+            'category_id'=>'1'
         ];
-        $this->productModel->storeProduct($data);
+        $this->productModel->store($data);
     }
 
-    // public function show(){
-    //     $product= $this->productModel->findById(1);
-    //     return $this->loadView('frontend.products.show',['product'=>$product]);// trỏ tới view  required
+    public function updateData(){
+        $id=$_GET['id'];
+         $data = [
+            'name'=> 'b',
+            'image'=>NULL,
+            'price'=>'a',
+            'category_id'=>'4'
+        ];
+        $this->productModel->updateData($id,$data);
+    }
+
+    public function deleteProduct(){
+        $id=$_GET['id'];
+        $this->productModel->deleteProduct($id);
+    }
+
+    public function show(){
+        $category_id=$_GET['category_id'];
+        $products= $this->productModel->findProductByCategoryId($category_id);
+        echo '<pre>';
+        // var_dump($products);
+        return $this->loadView('frontend.products.show',['product'=>$products]);// trỏ tới view  required
         
-    // }
+    }
 }
 
 

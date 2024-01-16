@@ -1,4 +1,3 @@
-<h1>ProductModel</h1>
 <?php
 class ProductModel extends BaseModel{
     const TABLE = 'products';
@@ -6,9 +5,25 @@ class ProductModel extends BaseModel{
        return $this->getAllData(self::TABLE,$select,$orderBy,$limit);
     }
 
-    public function storeProduct($data){
+    public function store($data){
         return $this->create(self::TABLE,$data);
     }
+
+    public function updateData($id, $data){
+        $this->update(self::TABLE,$id,$data);
+    }
+
+    public function deleteProduct($id){
+        $this->delete(self::TABLE,$id);
+        
+    }
+
+
+    public function findProductByCategoryId($category_id){
+        $this->findByCategoryId(self::TABLE,$category_id);
+        
+    }
+
 }
 
 ?>
