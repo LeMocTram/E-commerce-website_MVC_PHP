@@ -18,7 +18,6 @@ Description :
             {
                 $$key=$value;
             }
-            // die($viewPath);  
            require (self::VIEW_FOLDER_NAME . '/' . str_replace('.','/',$viewPath) . '.php');// truocứ required có biến thì có thể lấy ra được từ trang view
         }
 

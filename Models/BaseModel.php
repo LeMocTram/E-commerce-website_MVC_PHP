@@ -30,23 +30,15 @@ class BaseModel extends Database {
     }
     //findbyid
     public function findByCategoryId($table,$category_id){
-        $sql= "SELECT * FROM ${table} WHERE category_id = ${category_id} LIMIT 3";
-        echo $sql;
+        $sql= "SELECT * FROM ${table} WHERE category_id = ${category_id}";
+        // echo $sql;
         $query = $this->_query($sql);
         $data=[];
         //Mỗi lần lấy ra được 1 bản ghi thông qua câu lệnh mysqli_fetch_assoc($query)
         while($row = mysqli_fetch_assoc($query)){
             array_push($data,$row);
-             echo'<pre>';
-
-            print_r($data) ;
         }
         return $data;
-        // echo var_dump($data);
-            // echo'<pre>';
-
-            // print_r($data) ;
-
     }
 
     public function findById($table,$id){
@@ -63,24 +55,20 @@ class BaseModel extends Database {
 
         $newValues= implode(",",$values);
         $sql = "INSERT INTO ${table} (${columns}) VALUES (${newValues})" ;
-        echo $sql;
-        // $this->_query($sql);
+        $this->_query($sql);
             
 
 
     }
     // update data
     public function update($table,$id,$data=[]){
-        // echo $newValues= implode(",",$values);
         $dataSets=[];
-        // print_r($data);
         foreach($data as $key => $val){
                 array_push($dataSets, "$key= '" . $val . "'");
         }
         $newData=implode(",",$dataSets);
         $sql = "UPDATE ${table} SET ${newData} WHERE id = ${id}";
-        // echo $sql;
-        // $this->_query($sql);
+        $this->_query($sql);
 
 
     }
@@ -88,9 +76,15 @@ class BaseModel extends Database {
     public function delete($table,$id){
 
         $sql="DELETE FROM ${table} WHERE id = ${id}";
-        echo $sql;
         $this->_query($sql);
 
+    }
+
+
+    public function getPassWord($table,$username){
+        $sql= "SELECT * FROM ${table} WHERE username = '${username}' ";
+        $query = $this->_query($sql);
+        return  $query;
     }
 
     private function _query($sql){

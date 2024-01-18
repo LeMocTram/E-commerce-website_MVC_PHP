@@ -21,15 +21,15 @@ class ProductController extends BaseController {
         // return include './Views/frontend/products/index.php';
     }
 
-    public function store(){
-        $data = [
-            'name'=> 'ABC',
-            'image'=>NULL,
-            'price'=>'1500000',
-            'category_id'=>'1'
-        ];
-        $this->productModel->store($data);
-    }
+    // public function store(){
+    //     $data = [
+    //         'name'=> 'ABC',
+    //         'image'=>NULL,
+    //         'price'=>'1500000',
+    //         'category_id'=> 1
+    //     ];
+    //     $this->productModel->store($data);
+    // }
 
     public function updateData(){
         $id=$_GET['id'];
@@ -49,10 +49,10 @@ class ProductController extends BaseController {
 
     public function show(){
         $category_id=$_GET['category_id'];
-        $products= $this->productModel->findProductByCategoryId($category_id);
-        echo '<pre>';
+        $product= $this->productModel->findProductByCategoryId($category_id);
+        // echo '<pre>';
         // var_dump($products);
-        return $this->loadView('frontend.products.show',['product'=>$products]);// trỏ tới view  required
+        return $this->loadView('frontend.products.show',['products'=>$product]);// trỏ tới view  required
         
     }
 }
