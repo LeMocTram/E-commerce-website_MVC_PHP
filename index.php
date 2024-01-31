@@ -5,12 +5,10 @@ Controller sẽ trỏ tới Model->DB để lấy dữ liệu hiện -> View
 -->
 
 <?php
-// session_start();    
+// session_start();   
 require "./Core/Database.php";
 require "./Controllers/BaseController.php"; 
 require "./Models/BaseModel.php";
-
-
 
 //Giong codeigniter
 //ucfirst =>> kí tự đầu in hoa.

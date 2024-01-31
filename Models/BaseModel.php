@@ -10,7 +10,7 @@ class BaseModel extends Database {
     }
 
     //read data
-    public function getAllData($table,$select=['*'] ,$orderBy=[],$limit=15){
+    public function getAllData($table,$select=['*'] ,$orderBy=[],$limit=25){
         $orderByString=implode(' ',$orderBy);
         $column= implode(',',$select);
         if($orderByString){

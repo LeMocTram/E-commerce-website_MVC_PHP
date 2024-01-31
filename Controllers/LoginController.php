@@ -1,23 +1,26 @@
  <?php
+require_once 'vendor/autoload.php';
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 
 class LoginController extends BaseController{
 
         private $loginModel;
+        private $key = "abcdef";
 
         public function __construct(){
             $this->loadModel('LoginModel');
             $this->loginModel = new LoginModel;
-
         }
 
         public function index(){
             // echo __METHOD__;
-           
             return $this->loadView('frontend.manage.login');// trỏ tới view  required
         }
 
         public function login(){
-            $result_mess=false;
             if(isset($_POST['submit'])){
                 $username= $_POST["username"];
                 $password_input=$_POST["password"];
@@ -31,28 +34,76 @@ class LoginController extends BaseController{
                         $username=$row["username"];
                         $password=$row["password"];
                     }
-                    if(hash('md5',$password_input===$password)){
+                    if((hash('md5',$password_input)===$password)){
+                            // $token = $this->generateToken($username);
                             // $_SESSION["id"]=$id;
                             // setcookie("id","username", time()+3600, "/",0);
                             setcookie("id", $password, time() + 3600, "/"); 
                             header('Location: ?controller=dashboard');
-                            // $this->loadView('frontend.manage.dashboard',["result"=>$result_mess=true]);
+                            // $this->loadView('frontend.manage.proccessToken',["token"=>$token]);
                     }else{
                             $this->loadView('frontend.manage.login',["result"=>$result_mess]);
                     }
-
                 }
             }
         }
+
+
+        public function validateToken(){
+            $token=(string)$_POST["token"];
+            try {
+                // Xác minh và giải mã token
+               $decoded = JWT::decode($token, new Key($this->key, 'HS256'));
+                if(!isset($decoded)){
+                    header('Location: ?controller=login');
+                }else{
+                    ?>
+                    <form id="hiddenForm" action="?controller=dashboard" method="post" style="display: none;">
+                        <input type="text" name="result" value="OK">
+                        <input type="password" name="password" value="example_password">
+                        <button type="submit">Submit</button>
+                    </form>
+                    <script>
+                        window.onload = function() {
+                            document.getElementById('hiddenForm').submit();
+                        };
+                    </script>
+                    <?php
+                    
+                }
+            } catch (\Exception $e) {
+                // Token không hợp lệ
+                return false;
+            }
+        }
+
+
+
+
           public function logout(){
             // cookie or session
             // unset($_SESSION['id']);
             // session_destroy();
             setcookie('id', "",time()-3600,'/');
-            $this->loadView('frontend.manage.login',[]);
+
+            header('Location: ?controller=login');
 
         }
 
+       
+        private function generateToken($user_id) {
+            $expiration_time = time() + 3600; // 1 giờ
+            $payload = array(
+                "iss" => "your_issuer",
+                "aud" => "your_audience",
+                "iat" => time(),
+                "exp" => $expiration_time,
+                "data" => array(
+                    "user_id" => $user_id
+                )
+            );
+            return JWT::encode($payload, $this->key, 'HS256');
+        }
 
 }
 

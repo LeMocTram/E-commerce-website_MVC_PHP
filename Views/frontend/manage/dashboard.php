@@ -6,6 +6,10 @@ if(!isset($_COOKIE["id"])){
 // if(!isset($_SESSION["id"])){
 //     header('Location: ?controller=login');
 // }
+// if(!isset($_POST['result'])){
+//     header('Location: ?controller=login');
+// }
+
 
 ?>
 <!DOCTYPE html>
@@ -43,12 +47,13 @@ if(!isset($_COOKIE["id"])){
           <h4 class="modal-title">Add</h4>
         </div>
         <div class="modal-body">
-            <form id="productForm" method="post" action='?controller=dashboard&action=add'>
+            <form id="productForm" method="post" action='?controller=dashboard&action=add' enctype="multipart/form-data">
                 <label for="productName">Name:</label>
                 <input type="text"  name="name" required=""  autocomplete="off">
 
-                <label for="productImage">Link Image:</label>
-                <input type="text"  name="image" required=""  autocomplete="off">
+                <label for="productImage">Upload Image:</label>
+                <input type="file"  name="image" required=""  autocomplete="off">
+                <!-- <input type="file"  name="image" required=""  autocomplete="off"> -->
 
                 <label for="productPrice">Price:</label>
                 <input type="text"  name="price" required="" autocomplete="off">
@@ -92,7 +97,7 @@ if(!isset($_COOKIE["id"])){
                 <tr>
                     <td><?php echo $product["id"]?></td>
                     <td><?php echo $product["name"]?></td>
-                    <td><?php echo $product["image"]?></td>
+                    <td><?php echo '<img style="max-width:47px;max-height:62px" src="' .  $product["image"] . '" alt="Image">';?></td>
                     <td><?php echo $product["price"] . 'đ' ?></td>
                     <td><?php
                     if($product["category_id"]==1){

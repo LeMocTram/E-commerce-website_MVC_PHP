@@ -36,7 +36,7 @@
                 ?>
                     <div class="col-3 ">
                         <div class="card" style=" margin-top:3rem">
-                            <img style="max-width:304px;max-height:456px" src="<?php echo $product["image"] ?>"  title="<?php echo $product["name"]?>"class="card-img-top" alt="...">
+                            <img style="width:304px;height:456px; object-fit: contain;" src="<?php echo $product["image"] ?>"  title="<?php echo $product["name"]?>"class="card-img-top" alt="...">
                             <div class="card-body">
                                 
                                 <p class="card-text product-name" title="<?php echo $product["name"]?>" > <?php echo $product["name"]?></p>

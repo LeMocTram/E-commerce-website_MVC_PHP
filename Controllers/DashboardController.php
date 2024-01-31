@@ -23,9 +23,10 @@ class DashboardController extends BaseController {
         //Add new products
         
         public function add(){
+            $base64='data:image/png;base64,'.base64_encode(file_get_contents($_FILES["image"]["tmp_name"]));
             $data = [
             'name'=> $_POST["name"],
-            'image'=>$_POST["image"],
+            'image'=>$base64,
             'price'=>$_POST["price"],
             'category_id'=> $_POST["category_id"]
         ];
@@ -36,7 +37,6 @@ class DashboardController extends BaseController {
         public function delete(){
             $id=$_GET['id'];
             $this->productModel->deleteProduct($id);
-             return $this->loadView('frontend.manage.edit',['products'=>$product]);
             header('Location: ?controller=dashboard');
 
 
@@ -51,12 +51,28 @@ class DashboardController extends BaseController {
 
         public function update(){
             $id=$_GET['id'];
-             $data = [
-            'name'=> $_POST["name"],
-            'image'=>$_POST["image"],
-            'price'=>$_POST["price"],
-            'category_id'=> $_POST["category_id"]
-             ];
+            if($_FILES["image"]["tmp_name"]===""){
+                $data = [
+                    'name'=> $_POST["name"],
+                    'price'=>$_POST["price"],
+                    'category_id'=> $_POST["category_id"]
+                    ];
+            }else{
+                $base64='data:image/png;base64,'.base64_encode(file_get_contents($_FILES["image"]["tmp_name"]));
+                $data = [
+                'name'=> $_POST["name"],
+                'image'=>$base64,
+                'price'=>$_POST["price"],
+                'category_id'=> $_POST["category_id"]
+                ];
+
+            }
+         
+            
+                
+            
+      
+            
             $this->productModel->updateData($id,$data);
             header('Location: ?controller=dashboard');
             

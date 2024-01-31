@@ -1,0 +1,46 @@
+  *{
+        
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+   
+    .body-container{
+        margin-top: 100px;
+    }
+    .carousel-control-next, .carousel-control-prev{
+        z-index: 0;
+    }
+    .card-body .product-name{
+        height: 48px;
+    }
+
+
+.heading-sub h5 {
+    font-size: 23px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333;
+    position: relative;
+    margin: 20px 0 0 0;
+}
+
+
+.product-item-new{
+    position: relative;
+}
+
+.badge-new{
+    height: 48px;
+    width: 48px;
+    background: #b31f2a;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 48px;
+    text-align: center;
+    font-size: 13px;
+    /* z-index: 1; */
+}

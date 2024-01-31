@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4 MEN</title>
+    <link rel="stylesheet" type="text/css" href="Views\frontend\css\home.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/9f134b1586.js" crossorigin="anonymous"></script>
 </head>
@@ -13,6 +14,7 @@
         <div class="header"> 
         <?php include('Views\frontend\partitions\header.php');?>
         </div>
+        <!-- Slider  -->
         <div class="slider">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -31,18 +33,51 @@
                     <img src="..." class="d-block w-100" alt="...">
                     </div> -->
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <button  class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <button  class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
         </div>
+
+        <!-- Body  -->
         <div class="container">
-            <h5>SẢN PHẨM NỔI BẬC</h5>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="heading-sub heading-sub2 text-center">
+                        <h5>SẢN PHẨM MỚI NHẤT</h5>
+                    </div>
+                    <div class="row products-list">
+                            <?php
+                            if($products){
+                                foreach($products as $product){
+                            ?>
+                                <div class="col-3">
+                                    
+                                    <div class="card product-item-new" style=" margin-top:3rem">
+                                        <img style="width:304px;height:456px; object-fit: contain;" src="<?php echo $product["image"] ?>"  title="<?php echo $product["name"]?>"class="card-img-top" alt="...">
+                                        <span class="badge-new">
+                                            New
+                                        </span>
+                                        <div class="card-body">
+                                            <p class="text-center card-text product-name" title="<?php echo $product["name"]?>" > <?php echo $product["name"]?></p>
+                                            <p class="text-center card-text"><?php echo $product["price"]."đ"?></p>
+                                        </div>
+                                    </div>
+                                </div>    
+                            <?php
+                                }
+                            }else{
+                                echo '<h1>Chưa có sản phẩm</h1>';
+                            }
+                            ?>
+                    </div>
+                </div>
+            </div>
 
             
 
@@ -56,21 +91,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
-<style>
-    *{
-        
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-   
-    .body-container{
-        margin-top: 100px;
-    }
-
-
-
-</style>
 
 </html>
