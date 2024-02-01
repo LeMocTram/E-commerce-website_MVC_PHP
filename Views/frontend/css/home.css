@@ -11,8 +11,8 @@
     .carousel-control-next, .carousel-control-prev{
         z-index: 0;
     }
-    .card-body .product-name{
-        height: 48px;
+    .card-body .item-name{
+        min-height: 48px;
     }
 
 
@@ -42,5 +42,32 @@
     line-height: 48px;
     text-align: center;
     font-size: 13px;
-    /* z-index: 1; */
 }
+
+
+.product-item-new .item-img{
+    object-fit: contain;
+    max-width:304px;
+    max-height:456px;
+}
+
+
+.product-item-new .btn-add-to-cart{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    background: #b31f2a;
+    border-radius: 50%;
+    padding: 20px;
+    display: none;
+    border: none;
+}
+
+.product-item-new .btn-add-to-cart:hover {
+    background: #ed0918;
+}
+.product-item-new:hover .btn-add-to-cart{
+    display: block;
+} 

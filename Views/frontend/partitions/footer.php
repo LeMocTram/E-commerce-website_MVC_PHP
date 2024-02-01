@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="Views\frontend\css\footer.css">
   
 </head>
 <body>
@@ -64,4 +63,11 @@
       </div>
 </footer>
 </body>
+<style>
+    <?php 
+    include 'Views/frontend/css/footer.css'
+    ?>
+</style>
+
+
 </html>

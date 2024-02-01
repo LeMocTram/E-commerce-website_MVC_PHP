@@ -1,8 +1,15 @@
 <?php
 class HomeModel extends BaseModel{
-    const TABLE = 'products';
+    const TABLE_PRODUCTS = 'products';
+    const TABLE_CUSTOMERS= 'customers';
+
     public function getAllProducts($select=['*'],$orderBy=[],$limit=8){
-       return $this->getAllData(self::TABLE,$select,$orderBy,$limit);
+       return $this->getAllData(self::TABLE_PRODUCTS,$select,$orderBy,$limit);
+    }
+
+
+    public function getpCustomer($eCustomer){
+         return $this->getPassWordCustomer(self::TABLE_CUSTOMERS, $eCustomer);
     }
 
     // public function store($data){

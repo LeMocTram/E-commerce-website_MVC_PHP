@@ -80,9 +80,16 @@ class BaseModel extends Database {
 
     }
 
-
+    //Password for Dashboard =>>> Admin
     public function getPassWord($table,$username){
         $sql= "SELECT * FROM ${table} WHERE username = '${username}' ";
+        $query = $this->_query($sql);
+        return  $query;
+    }
+
+    //Password for Home =>>> Customer
+    public function getPassWordCustomer($table,$eCustomer){
+        $sql= "SELECT * FROM ${table} WHERE email = '${eCustomer}' ";
         $query = $this->_query($sql);
         return  $query;
     }
@@ -90,8 +97,6 @@ class BaseModel extends Database {
     private function _query($sql){
        return  mysqli_query($this->connect,$sql);
     }
-
-
 
 
 }

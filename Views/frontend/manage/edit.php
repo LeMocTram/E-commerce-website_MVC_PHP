@@ -27,7 +27,7 @@ if(!isset($_COOKIE["id"])){
                 <label for="productImage">Image:</label>
                 <img style="max-width:47px;max-height:62px" src="<?php echo $products['image'];?>" alt="Image">
                 <label>Choose new image:</label>
-                <input type="file" id="fileInput" name="image" autocomplete="off" onchange="checkFileSize()"">
+                <input type="file" id="fileInput" name="image" autocomplete="off" onchange="checkFileSize()">
                 <label id="fileSizeDisplay"></label>
                 <br>
                 <label for="productPrice">Price:</label>

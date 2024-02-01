@@ -30,27 +30,38 @@
     <br>
         <div class="container">
             <div class="row">
-            <?php
-                if($products){
-                    foreach($products as $product){
-                ?>
-                    <div class="col-3 ">
-                        <div class="card" style=" margin-top:3rem">
-                            <img style="width:304px;height:456px; object-fit: contain;" src="<?php echo $product["image"] ?>"  title="<?php echo $product["name"]?>"class="card-img-top" alt="...">
-                            <div class="card-body">
-                                
-                                <p class="card-text product-name" title="<?php echo $product["name"]?>" > <?php echo $product["name"]?></p>
-                                <p class="card-text"><?php echo $product["price"]."đ"?></p>
-                                <a href="#" class="btn btn-primary">Mua</a>
-                            </div>
-                        </div>
-                    </div>    
-                <?php
-                    }
-                }else{
-                    echo '<h1>Chưa có sản phẩm</h1>';
-                }
-                ?>
+                <div class="col-md-12 col-sm-12">
+                    <div class="heading-sub heading-sub2 text-center">
+                        <h5>SẢN PHẨM MỚI NHẤT</h5>
+                    </div>
+                    <div class="row products-list">
+                            <?php
+                            if($products){
+                                foreach($products as $product){
+                            ?>
+                                <div class="col-3">
+                                    <div class="card product-item-new" style=" margin-top:3rem">
+                                        <img  class="item-img" src="<?php echo $product["image"] ?>"  title="<?php echo $product["name"]?>"class="card-img-top" alt="...">
+                                        <span class="badge-new">
+                                            New
+                                        </span>
+                                        <div class="card-body">
+                                            <p  class="text-center card-text item-name" title="<?php echo $product["name"]?>" > <?php echo $product["name"]?></p>
+                                            <p  class="text-center card-text item-price"><?php echo $product["price"]."đ"?></p>
+                                        </div>
+                                        <button onclick="getProductInfor('<?php echo htmlspecialchars(json_encode($product), ENT_QUOTES, 'UTF-8'); ?>')"  class="btn-add-to-cart">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </button>
+                                    </div>
+                                </div>    
+                            <?php
+                                }
+                            }else{
+                                echo '<h1>Chưa có sản phẩm</h1>';
+                            }
+                            ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -65,33 +76,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 <style>
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-   
-    .body-container{
-        background-color: #f4f4f4;
-        margin-top: 100px;
-        height: auto;
-        p.product-name {
-            white-space: nowrap; 
-            width: 100%; 
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .container{
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    }
+    <?php 
+        include 'Views/frontend/css/home.css'
+    ?>
 
-    .footer{
-        margin-top: 10px;
-        height:300px;
-        border: 2px solid red;
-    }
 </style>
 
 </html>
