@@ -1,0 +1,106 @@
+ @media (min-width: 64em) {
+        .menu-list{
+                display: none;
+        }
+}
+
+@media (min-width: 46.25em) and (max-width:63.9375em) {
+        .menu-list{
+                display: none;
+        }
+        .card-body .item-name{
+                height: auto;
+        }
+        .col-lg-3 .card-body p {
+                font-size: 80%;
+        }
+        .card-body p {
+                line-height: normal;
+                word-wrap: break-word;
+        }
+        .body-container .container-detail-card{
+                display: block;
+        }
+        #cart-col-right .detail-infor-cart{
+                border: none;
+        }
+        .form-group{
+                display: block;
+        }
+        .form-group input,
+        .form-group textarea{
+                margin: 0 12px;
+        }
+}
+
+@media (max-width:46.1875em) {
+        .catelog{
+                display: none;
+        }
+        .menu-list{
+                /* display: block; */
+        }
+        .icon-wapper{
+                width: 50%;
+        }
+        .cart-infor{
+                
+                right: -100px;
+               
+        }
+        .search .search-input {
+                display: none;
+                width: 180px;
+                position: absolute;
+                top: 110%;
+                left: 0;
+        }
+        .header-container {
+                padding: 0 8px;
+        }
+        .btn-menu{
+                display: flex;
+                margin: auto;
+        }
+        .menu-wapper{
+                position: relative;
+                background: #ededed;
+                margin: auto;
+                min-width: 32px;
+                height: 32px;
+                display: flex;
+                i{
+                        margin: auto;
+                        font-size: 1rem;
+                        color: #762802
+                }
+        }
+
+
+
+    /* CART */
+        .body-container .container-detail-card{
+                display: block;
+        }
+        #cart-col-right .detail-infor-cart{
+                border: none;
+        }
+        .form-group{
+                display: block;
+
+        }
+        .form-group input,
+        .form-group textarea{
+                margin: 0 12px;
+         }
+
+
+         /* Toats */
+        .toast{
+                width: 150px;
+                position: absolute;
+                background-color: lime;
+                right: 0;
+                top: -50px;
+        }
+}

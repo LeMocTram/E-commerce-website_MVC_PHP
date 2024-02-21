@@ -38,10 +38,7 @@ class DashboardController extends BaseController {
             $id=$_GET['id'];
             $this->productModel->deleteProduct($id);
             header('Location: ?controller=dashboard');
-
-
         }
-        
         public function edit(){
             $id=$_GET['id'];
            $product= $this->productModel->findProductById($id);

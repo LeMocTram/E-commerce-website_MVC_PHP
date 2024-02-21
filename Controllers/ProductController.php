@@ -5,7 +5,6 @@ class ProductController extends BaseController {
 
     private $productModel;
 
-
     public function __construct(){
         $this->loadModel('ProductModel');
         $this->productModel = new ProductModel;
@@ -20,16 +19,6 @@ class ProductController extends BaseController {
         return $this->loadView('frontend.products.index',['products'=>$product]);// trỏ tới view  required
         // return include './Views/frontend/products/index.php';
     }
-
-    // public function store(){
-    //     $data = [
-    //         'name'=> 'ABC',
-    //         'image'=>NULL,
-    //         'price'=>'1500000',
-    //         'category_id'=> 1
-    //     ];
-    //     $this->productModel->store($data);
-    // }
 
     public function updateData(){
         $id=$_GET['id'];
@@ -46,17 +35,5 @@ class ProductController extends BaseController {
         $id=$_GET['id'];
         $this->productModel->deleteProduct($id);
     }
-
-    public function show(){
-        $category_id=$_GET['category_id'];
-        $product= $this->productModel->findProductByCategoryId($category_id);
-        // echo '<pre>';
-        // var_dump($products);
-        return $this->loadView('frontend.products.show',['products'=>$product]);// trỏ tới view  required
-        
-    }
 }
-
-
-
 ?>

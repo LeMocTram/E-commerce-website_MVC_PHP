@@ -1,0 +1,72 @@
+.dir-cart{
+    display: flex;
+    list-style: none;
+}
+.dir-name{
+    margin: 0 10px;
+    font-size: 13px;
+}
+.dir-name a{
+    text-decoration: none;
+    color: #333333;
+}
+
+.container-detail-card{
+    display: flex;
+}
+
+.detail-infor-cart,
+.detail-infor-contact{
+    padding: 20px;
+}
+.detail-infor-cart{
+    border-left: 1px solid #CCC;
+}
+.form-group{
+    margin:0 -15px 15px -15px;
+    display: flex;
+    font-size: 14px;
+    color: #333333;
+}
+.control-label{
+    text-align: right;
+    padding: 7px 15px 0;
+}
+.form-group input {
+    padding: 6px 12px;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+.total-payment{
+    border-top: 1px solid #ccc;
+    display: flex;
+}
+legend{
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: inherit;
+    color: #333;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.payment-methods{
+
+    float: right;
+}
+#payment{
+    width: 300px;
+    color: #fff;
+    background-color: #B31F2A;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    float: right;
+    margin-top: 20px;
+}

@@ -2,6 +2,11 @@
 if(!isset($_COOKIE["id"])){
     header('Location: ?controller=login');
 }
+// else{
+//      $value = $_COOKIE['id'];
+//     echo "Giá trị của cookie là: " . $value;
+//     die;
+// }
 //Check valid
 // if(!isset($_SESSION["id"])){
 //     header('Location: ?controller=login');

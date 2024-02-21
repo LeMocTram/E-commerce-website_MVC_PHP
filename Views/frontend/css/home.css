@@ -1,20 +1,16 @@
-  *{
-        
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+*{ 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
    
-    .body-container{
-        margin-top: 100px;
-    }
-    .carousel-control-next, .carousel-control-prev{
-        z-index: 0;
-    }
-    .card-body .item-name{
-        min-height: 48px;
-    }
-
+.body-container{
+    position: relative;
+    margin-top: 150px;
+}
+.carousel-control-next, .carousel-control-prev{
+    z-index: 0;
+}
 
 .heading-sub h5 {
     font-size: 23px;
@@ -22,12 +18,18 @@
     text-transform: uppercase;
     color: #333;
     position: relative;
-    margin: 20px 0 0 0;
+    margin: 40px 0;
 }
 
 
-.product-item-new{
+/* Card Item  */
+
+.card.product-item{
     position: relative;
+    margin: 20px 0;
+}
+.product-item .product-item-link{
+    text-decoration: none;
 }
 
 .badge-new{
@@ -45,14 +47,10 @@
 }
 
 
-.product-item-new .item-img{
-    object-fit: contain;
-    max-width:304px;
-    max-height:456px;
-}
 
-
-.product-item-new .btn-add-to-cart{
+.product-item .btn-add-to-cart{
+    height: 60px;
+    width: 60px;
     position: absolute;
     top: 40%;
     left: 50%;
@@ -64,10 +62,28 @@
     display: none;
     border: none;
 }
+.card-body .item-name{
+    min-height: 97px;
+    color: #333;
+}
 
-.product-item-new .btn-add-to-cart:hover {
+.card-body .item-price{
+    color: #ed0918;
+}
+
+.product-item .btn-add-to-cart:hover {
     background: #ed0918;
 }
-.product-item-new:hover .btn-add-to-cart{
+.product-item:hover .btn-add-to-cart{
     display: block;
-} 
+}
+
+/* TOAST */
+.toast{
+    position: absolute;
+    background-color: lime;
+    /* background-color: #ff0011; */
+    right: 0;
+    top: -50px;
+}
+

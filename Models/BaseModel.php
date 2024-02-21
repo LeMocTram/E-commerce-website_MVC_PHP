@@ -60,6 +60,7 @@ class BaseModel extends Database {
 
 
     }
+    
     // update data
     public function update($table,$id,$data=[]){
         $dataSets=[];
@@ -92,7 +93,64 @@ class BaseModel extends Database {
         $sql= "SELECT * FROM ${table} WHERE email = '${eCustomer}' ";
         $query = $this->_query($sql);
         return  $query;
+
     }
+
+    // public function checkExistingEmail($table,$eCustomer) {
+    //     $sql= "SELECT * FROM ${table} WHERE email = '${eCustomer}' ";
+    //     $result = $this->_query($sql);
+    //     return $result->fetch();
+    // }
+
+    // Create account
+    public function createAccount($table,$eCustomer,$pCustomer,$nCustomer){
+        $sql = "INSERT INTO ${table} (id, name, email, password) VALUES ('', '${nCustomer}', '${eCustomer}', '${pCustomer}')";
+        // echo $sql;
+        // var_dump($sql);
+        $this->_query($sql);
+    }
+
+    // Check email exist
+    public function checkExistingEmail($table,$eCustomer){
+        $sql = "SELECT * FROM ${table} WHERE email = '$eCustomer'";
+        // var_dump($sql);
+        $query = $this->_query($sql);
+        return  mysqli_fetch_assoc($query);
+    }
+
+    public function storeOrder($table,$data=[]){
+        $columns = implode(',',array_keys($data));
+        $values = array_map(function($values){
+	    return "'" . $values . "'";},array_values($data));
+
+        $newValues= implode(",",$values);
+        $sql = "INSERT INTO ${table} (${columns}) VALUES (${newValues})";
+        $this->_query($sql);
+        $last_id = mysqli_insert_id($this->connect);
+        return $last_id;
+   }
+
+    public function storeOrderDetail($table,$orderId,$data=[]){
+        //  $result là order_id 
+        foreach ($data as $item) {
+             $arr = ['order_id'=> $orderId,
+                    'product_id'=> $item['id'],
+                    'quantity'=> $item['quantity'],
+                    'unit_price'=> $item['price']
+                ];
+            $columns = implode(',',array_keys($arr));
+            $values = array_map(function($values){
+            return "'" . $values . "'";},array_values($arr));
+
+            $newValues= implode(",",$values);
+            $sql = "INSERT INTO ${table} (${columns}) VALUES (${newValues})";
+            $this->_query($sql);
+        }
+        // die;
+
+    }
+
+
 
     private function _query($sql){
        return  mysqli_query($this->connect,$sql);

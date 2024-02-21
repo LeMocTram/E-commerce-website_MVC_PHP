@@ -1,3 +1,6 @@
+<br>
+<br>
+<br>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,10 +26,10 @@
           <div class="col-xs-6 col-md-3">
             <h6>Categories</h6>
             <ul class="footer-links">
-              <li><a href="?controller=product&action=show&category_id=1">Áo nam</a></li>
-              <li><a href="?controller=product&action=show&category_id=2">Quần nam</a></li>
-              <li><a href="?controller=product&action=show&category_id=3">Giày Dép</a></li>
-              <li><a href="?controller=product&action=show&category_id=4">Phụ kiện</a></li>
+              <li><a href="?controller=home&action=show&category_id=1">Áo nam</a></li>
+              <li><a href="?controller=home&action=show&category_id=2">Quần nam</a></li>
+              <li><a href="?controller=home&action=show&category_id=3">Giày Dép</a></li>
+              <li><a href="?controller=home&action=show&category_id=4">Phụ kiện</a></li>
             </ul>
           </div>
 
