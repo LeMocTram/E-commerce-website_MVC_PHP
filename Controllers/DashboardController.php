@@ -6,16 +6,28 @@ class DashboardController extends BaseController {
 
 
         private $productModel;
+        private $orderModel;
+        private $customerModel;
         public function __construct(){
                 $this->loadModel('ProductModel');
                 $this->productModel = new ProductModel;
+                $this->loadModel('OrderModel');
+                $this->orderModel = new OrderModel;
+                 $this->loadModel('CustomerModel');
+                $this->customerModel = new CustomerModel;
 
             }
 
         public function index(){
-            $selectColumn=['id','name','image','price','category_id'];
-            $order=['column'=>'id','order'=>'asc'];
-            $product =  $this->productModel->getAllProducts($selectColumn,$order);
+            if(!isset($_GET['category_id'])){
+                $selectColumn=['id','name','image','price','category_id'];
+                $order=['column'=>'id','order'=>'asc'];
+                $product =  $this->productModel->getAllProducts($selectColumn,$order);
+            }else{
+                $category_id=$_GET['category_id'];
+                $product =  $this->productModel->findProductByCategoryId($category_id);
+            }
+            
             return $this->loadView('frontend.manage.dashboard',['products'=>$product]);
         }
        
@@ -42,7 +54,7 @@ class DashboardController extends BaseController {
         public function edit(){
             $id=$_GET['id'];
            $product= $this->productModel->findProductById($id);
-            return $this->loadView('frontend.manage.edit',['products'=>$product]);
+            return $this->loadView('frontend.manage.dashboard',['products'=>$product]);
 
         }
 
@@ -64,15 +76,23 @@ class DashboardController extends BaseController {
                 ];
 
             }
-         
-            
-                
-            
-      
-            
             $this->productModel->updateData($id,$data);
             header('Location: ?controller=dashboard');
             
+        }
+        public function manageOders(){
+            $selectColumn=['*'];
+            $sort=['column'=>'id','order'=>'desc'];
+            $order =  $this->orderModel->getOrders($selectColumn,$sort);
+            return $this->loadView('frontend.manage.dashboard',['orders'=>$order]);
+
+        }
+        public function manageCustomers(){
+            $selectColumn=['*'];
+            $sort=['column'=>'id','order'=>'asc'];
+            $customer =  $this->customerModel->getAllCustomers($selectColumn,$sort);
+            return $this->loadView('frontend.manage.dashboard',['customers'=>$customer]);
+
         }
 
 

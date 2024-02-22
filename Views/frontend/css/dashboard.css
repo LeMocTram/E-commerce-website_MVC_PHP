@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-dashboard{
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    /* display: flex; */
+    display: block;
+}
+.header-dashboard-list{
+    list-style: none;
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0
+}
+.dashboard-list-item{
+    margin-left: 20px;
+    background: #ddd;
+    padding: 5px 10px;
+}
+.btn-logout{
+    margin-right: 10px;
+    position: absolute;
+    right: 0;
+}
+/* .btn-logout{
+    float: right;
+} */
+span{
+    height: 100%;
+    position:absolute;
+    top: 0;
+    right: 20px;
+}
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color: #333;
+    color: #fff;
+}
+form {
+    width: 50%;
+    margin: 20px auto;
+}
+input[type="text"], input[type="number"], input[type="submit"] {
+    padding: 10px;
+    margin: 5px;
+    width: 100%;
+}
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+button {
+    background-color: #d9534f;
+    color: #fff;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+   
+}
+
+.menu-list-dropdown{
+    list-style: none;
+    display: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #dadada;
+}
+
+
+/*Dropdown*/

@@ -48,7 +48,7 @@ if(isset($productDetail)){
                         <button class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> Đăng ký mua</button>
                     </div>
                     <div class="addToCart col-md-6 col-sm-6 col-xs-6">
-                        <a class="addToCart-link" onclick="alert('Button clicked!'); return false;" > + Thêm vào giỏ hàng</a>
+                        <a class="addToCart-link" onclick="getProductInfor('<?php echo htmlspecialchars(json_encode($productDetail), ENT_QUOTES, 'UTF-8'); ?>')" > + Thêm vào giỏ hàng</a>
                     </div>
                 </div>
             </div>

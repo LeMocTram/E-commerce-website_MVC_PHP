@@ -1,4 +1,12 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/PHPMailer/src/Exception.php';
+require 'vendor/PHPMailer/src/PHPMailer.php';
+require 'vendor/PHPMailer/src/SMTP.php';
+
 class HomeController extends BaseController {
 
         private $homeModel;
@@ -104,10 +112,6 @@ class HomeController extends BaseController {
                 // $cartData = $_POST["cartData"];
                 $arr = array($_POST["address"],$_POST["ward"],$_POST["districts"],$_POST["provinces"]);
                 $arrAddress = implode(", ", $arr);
-                // echo gettype($cartData);
-                // echo '<pre>';
-                // print_r($cartData);
-                // var_dump($cartData);
                 $cartData = json_decode($_POST["cartData"], true);
                 if($_POST["idCustomer"]===""){
                     $data = [
@@ -122,12 +126,14 @@ class HomeController extends BaseController {
                     ];
                 }else{
                     $data = [
-                    'customer_id'=> $_POST["idCustomer"],
-                    'fullname'=> $_POST["fullname"],
-                    'phone'=> $_POST["phone"],
-                    'email'=> $_POST["email"],
-                    'address'=> $_POST["address"],
-                    'total'=> $_POST["totalBill"]
+                        'customer_id'=> $_POST["idCustomer"],
+                        'fullname'=> $_POST["fullname"],
+                        'phone'=> $_POST["phone"],
+                        'email'=> $_POST["email"],
+                        'address'=> $arrAddress,
+                        'total'=> $_POST["totalBill"],
+                        'note'=> $_POST["note"],
+                        'method'=> $_POST["method"]
                 ];
                 }
                 
@@ -136,8 +142,40 @@ class HomeController extends BaseController {
                 if(isset($result)&& is_int($result)){
                     $this->orderDetailModel->store($result,$cartData);
                     
+
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        //Server settings
+                        $mail->isSMTP();                                            //Send using SMTP
+                        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                        $mail->Username   = '19522373@gm.uit.edu.vn';                     //SMTP username
+                        $mail->Password   = 'mhcs dprj woty essi';                               //SMTP password
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                        //Recipients
+                        $mail->setFrom('19522373@gm.uit.edu.vn', '4men');
+                        $mail->addAddress($_POST["email"], $_POST["fullname"]);     //Add a recipient
+                        $mail->addCC('19522373@gm.uit.edu.vn');
+                
+                        //Content
+                        $mail->isHTML(true);                                  //Set email format to HTML
+                        $mail->Subject = 'Order Success';
+                        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+                        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                        $mail->send();
+                        // echo 'Message has been sent';
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
                     setcookie('sendOrder', 'true', time() + 3600, "/");
                     header('Location: ?controller=home');
+
+
+                    
                 }else{
                     echo "Luu that bai";
                 }

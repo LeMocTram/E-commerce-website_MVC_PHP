@@ -9,16 +9,22 @@ class BaseModel extends Database {
        
     }
 
-    //read data
+    //read data //
     public function getAllData($table,$select=['*'] ,$orderBy=[],$limit=25){
         $orderByString=implode(' ',$orderBy);
         $column= implode(',',$select);
         if($orderByString){
             $sql = "SELECT ${column} FROM ${table} ORDER BY ${orderByString} LIMIT ${limit}";
+            // die($sql);
+
+            
         }else{
             $sql = "SELECT ${column} FROM ${table} LIMIT ${limit}";
-            // die($sql);
+            die($sql);
         }
+
+        // echo $sql;
+        // die;
         $query = $this->_query($sql);
         $data=[];
         //Mỗi lần lấy ra được 1 bản ghi thông qua câu lệnh mysqli_fetch_assoc($query)
@@ -147,6 +153,12 @@ class BaseModel extends Database {
             $this->_query($sql);
         }
         // die;
+
+    }
+
+
+    // Manage Model
+    public function getAllOrders(){
 
     }
 

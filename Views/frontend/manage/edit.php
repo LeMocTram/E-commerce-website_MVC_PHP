@@ -8,7 +8,7 @@ if(!isset($_COOKIE["id"])){
 
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@ if(!isset($_COOKIE["id"])){
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body> -->
 
     <h1 style="text-align: center; margin-bottom:100px;margin-top:100px;">EDIT FORM</h1>
 
@@ -45,7 +45,7 @@ if(!isset($_COOKIE["id"])){
                 <input type="submit" value="Update Product">
             </form>
             <p id="fileSizeDisplay"></p>
-</body>
+<!-- </body>
 <script>
     function checkFileSize() {
         var fileInput = document.getElementById('fileInput');
@@ -114,4 +114,4 @@ if(!isset($_COOKIE["id"])){
         }
 
 </style>
-</html>
+</html> -->
