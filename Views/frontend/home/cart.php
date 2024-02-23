@@ -12,35 +12,35 @@
                 <div class="form-group">
                     <label class="col-lg-4 control-label">Họ và tên *</label>
                     <div class="col-lg-8"> 
-                        <input type="text" name="fullname" id="fullname" class="form-control field" value=""> 
+                        <input type="text" name="fullname" id="fullname" class="form-control field" value="" required> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-lg-4 control-label">Email</label>
-                    <div class="col-lg-8"> <input type="text" placeholder="Không bắt buộc" class="form-control field" name="email" id="email" value=""> </div>
+                    <label class="col-lg-4 control-label">Email *</label>
+                    <div class="col-lg-8"> <input type="email" class="form-control field" name="email" id="email" value="" required> </div>
 
                 </div>
                 <div class="form-group">
                     <label class="col-lg-4 control-label">Số điện thoại *</label>
-                    <div class="col-lg-8"> <input type="text" class="form-control field" data-field="phone" data-field-valid="phone" id="phone" name="phone" value=""> <span data-message-for="phone"> </span> </div>
+                    <div class="col-lg-8"> <input type="text" class="form-control field" data-field="phone" data-field-valid="phone" id="phone" name="phone" value="" required> <span data-message-for="phone"> </span> </div>
                 </div>
                 <legend>Địa chỉ giao hàng</legend>
                 
                 <div class="form-group"> 
                     <label class="col-lg-4 control-label">Tỉnh thành*</label> 
-                    <div class="col-lg-8"> <input type="text" class="form-control field" name="provinces" id="provinces" value=""> </div> 
+                    <div class="col-lg-8"> <input type="text" class="form-control field" name="provinces" id="provinces" value="" required> </div> 
                 </div>
                 <div class="form-group"> 
                     <label class="col-lg-4 control-label">Quận huyện *</label> 
-                    <div class="col-lg-8"> <input type="text" class="form-control field" name="districts" id="districts" value=""> </div> 
+                    <div class="col-lg-8"> <input type="text" class="form-control field" name="districts" id="districts" value="" required> </div> 
                 </div>
                 <div class="form-group"> 
                     <label class="col-lg-4 control-label">Tên phường/Xã *</label> 
-                    <div class="col-lg-8"> <input type="text" class="form-control field" name="ward" id="ward" value=""> </div> 
+                    <div class="col-lg-8"> <input type="text" class="form-control field" name="ward" id="ward" value="" required> </div> 
                 </div>
                 <div class="form-group"> 
                     <label class="col-lg-4 control-label">Số nhà, tên đường *</label> 
-                    <div class="col-lg-8"> <input type="text" class="form-control field" name="address" id="address" value=""> </div> 
+                    <div class="col-lg-8"> <input type="text" class="form-control field" name="address" id="address" value="" required> </div> 
                 </div>
                 <div class="form-group"> 
                     <label class="col-lg-4 control-label">Ghi chú</label> 
@@ -111,6 +111,22 @@
     </div>
 </form>
 <script>
+
+        // Lắng nghe sự kiện submit của biểu mẫu
+    // document.querySelector('form').addEventListener('submit', function(event) {
+    //     // Kiểm tra xem một trong hai phương thức thanh toán đã được chọn hay chưa
+    //     var codChecked = document.getElementById('cod').checked;
+    //     var cashChecked = document.getElementById('cash').checked;
+
+    //     // Nếu không có phương thức thanh toán nào được chọn
+    //     if (!codChecked && !cashChecked) {
+    //         // Ngăn chặn hành vi mặc định của sự kiện submit
+    //         event.preventDefault();
+    //         // Hiển thị thông báo yêu cầu chọn hình thức thanh toán
+    //         alert('Vui lòng chọn một hình thức thanh toán.');
+    //     }
+    // });
+
 
     var idCustomer = getCookie('idCustomer');
     console.log("idCustomer",idCustomer);

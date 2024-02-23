@@ -10,7 +10,18 @@
     </div>
 <?php 
 if(isset($productDetail)){
-     
+    // echo "<pre>";
+    // print_r($productDetail);
+    // die;
+    if($productDetail['category_id']==='1'){
+        $chooseSize='Views/frontend/img/choose-size-ao.png';
+    }elseif ($productDetail['category_id']==='2') {
+        $chooseSize='Views/frontend/img/choose-size-quan.png';
+    }elseif ($productDetail['category_id']==='3') {
+        $chooseSize='Views/frontend/img/choose-size-giay.png';
+    }elseif ($productDetail['category_id']==='4') {
+        $chooseSize='#';
+    }
 }
 ?>
 </div>
@@ -28,24 +39,50 @@ if(isset($productDetail)){
             <div class="detail-body">
                 <div class="row select-wraps">
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <p>SIZE <span>*</span> <a href="#">Hướng dẫn chọn size</a></p>
-                        <select name="size-option" id="size-option">
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                            <option value="l">L</option>
-                        </select>
+                        
+                        <p>SIZE <span>*</span> <a target="_blank" href="<?php echo $chooseSize?>">Hướng dẫn chọn size</a></p>
+                        <?php
+                           if($productDetail['category_id']==='1'){
+                               echo '<select name="size-option" id="size-option">
+                                        <option value="s">S</option>
+                                        <option value="m">M</option>
+                                        <option value="l">L</option>
+                                        <option value="l">XL</option>
+                                        <option value="l">XXL</option>
+                                    </select>';
+                            }elseif ($productDetail['category_id']==='2') {
+                                 echo '<select name="size-option" id="size-option">
+                                        <option value="s">S</option>
+                                        <option value="m">M</option>
+                                        <option value="l">L</option>
+                                        <option value="l">XL</option>
+                                        <option value="l">XXL</option>
+                                    </select>';
+                            }elseif ($productDetail['category_id']==='3') {
+                                echo'<select name="size-option" id="size-option">
+                                        <option value="40">40</option>
+                                        <option value="41">41</option>
+                                        <option value="42">42</option>
+                                    </select>';
+                            }elseif ($productDetail['category_id']==='4') {
+                                echo'<select name="size-option" id="size-option">
+                                        <option value="free">Free</option>
+                                    </select>';
+                            }
+                        ?>
+                        
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
+                    <!-- <div class="col-md-6 col-sm-6 col-xs-6">
                         <p>SỐ LƯỢNG*</p>
                          <div class="quantity-input">
                           <input class="form-control quantity input-sm" option="1" cart="370699" rel="359264" style="width:60px; text-align:center;padding-right:0px; " value="1" type="number" min="1" max="10">
                         </div>
-                    </div>
+                    </div> -->
                    
                 </div>
                 <div class="row wraps-btn">
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <button class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> Đăng ký mua</button>
+                        <button class="btn-buy" onclick="getProductInfor('<?php echo htmlspecialchars(json_encode($productDetail), ENT_QUOTES, 'UTF-8'); ?>')"><a href="?controller=home&action=cart"><i class="fa-solid fa-cart-shopping"></i> Đăng ký mua</a></button>
                     </div>
                     <div class="addToCart col-md-6 col-sm-6 col-xs-6">
                         <a class="addToCart-link" onclick="getProductInfor('<?php echo htmlspecialchars(json_encode($productDetail), ENT_QUOTES, 'UTF-8'); ?>')" > + Thêm vào giỏ hàng</a>

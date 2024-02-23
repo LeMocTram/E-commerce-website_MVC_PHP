@@ -13,10 +13,10 @@
 			<h1>Login</h1>
                
 			<div>
-				<input type="text" placeholder="Username"  id="username" name='username' autocomplete="off" />
+				<input type="text" placeholder="Username"  id="username" name='username' autocomplete="off" required />
 			</div>
 			<div>
-				<input type="password" placeholder="Password"  id="password" name='password' readonly onfocus="this.removeAttribute('readonly');" />
+				<input type="password" placeholder="Password"  id="password" name='password' readonly onfocus="this.removeAttribute('readonly');" required />
 			</div>
 			<div>
                 <?php 

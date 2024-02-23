@@ -161,10 +161,42 @@ class HomeController extends BaseController {
                         $mail->addCC('19522373@gm.uit.edu.vn');
                 
                         //Content
-                        $mail->isHTML(true);                                  //Set email format to HTML
-                        $mail->Subject = 'Order Success';
-                        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-                        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                        $mail->CharSet = 'UTF-8'; // Thiết lập charset là UTF-8 để hỗ trợ ký tự Unicode
+                        $mail->isHTML(true); // Thiết lập định dạng email là HTML
+                        $mail->Subject = 'Xác nhận đặt hàng thành công';
+
+                        // Tạo nội dung HTML cho email
+                        $body = '<html><body>';
+
+                        // Thêm tiêu đề cho email
+                        $body .= '<h2>Xác nhận đặt hàng thành công</h2>';
+
+                        // Thêm thông điệp cho email
+                        $body .= '<p>Chào ' . $_POST["fullname"] . ',</p>';
+                        $body .= '<p>Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi. Chúng tôi xác nhận rằng đơn hàng của bạn đã được nhận và đang được xử lý. Dưới đây là chi tiết đơn hàng của bạn:</p>';
+
+                        // Thêm thông tin sản phẩm từ mảng $cartData vào email
+                        $body .= '<table border="1" cellspacing="0" cellpadding="10">';
+                        $body .= '<thead><tr><th>Hình ảnh</th><th>Tên sản phẩm</th><th>Giá</th><th>Số lượng</th></tr></thead>';
+                        $body .= '<tbody>';
+                        foreach ($cartData as $item) {
+                            $body .= '<tr>';
+                            $body .= '<td><img src="' . $item['image'] . '" alt="' . $item['name'] . '" style="max-width: 100px;"></td>';
+                            $body .= '<td>' . $item['name'] . '</td>';
+                            $body .= '<td>' . $item['price'] . ' VNĐ</td>';
+                            $body .= '<td>' . $item['quantity'] . '</td>';
+                            $body .= '</tr>';
+                        }
+                        $body .= '</tbody>';
+                        $body .= '</table>';
+
+                        // Thêm thông điệp kết thúc email
+                        $body .= '<p>Cảm ơn bạn đã mua sắm tại cửa hàng của chúng tôi. Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua email 19522373@gm.uit.edu.vn hoặc số điện thoại 0983962553.</p>';
+                        $body .= '<p>Trân trọng,<br>[Tên cửa hàng]</p>';
+                        $body .= '</body></html>';
+
+                        // Gán nội dung email đã tạo vào phần thân của email
+                        $mail->Body = $body;
 
                         $mail->send();
                         // echo 'Message has been sent';

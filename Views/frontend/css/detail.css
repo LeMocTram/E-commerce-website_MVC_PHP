@@ -64,6 +64,10 @@
     background: #b31f2a;
     color: #fff;
 }
+.btn-buy a{
+    text-decoration: none;
+     color: #fff;
+}
 
 .detail-product {
     justify-content: center;
