@@ -7,28 +7,28 @@ if (!myToken) {
     window.location.href = '?controller=login&action=logout';
 }
 </script>
- <h1 style="text-align: center; margin-bottom:100px; ">MANAGE CUSTOMER ACCOUNTS</h1>
+ <h1 style="text-align: center; margin-bottom:100px; ">Detail order</h1>
 
 <table>
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Customers Name</th>
+            <th>OrderID</th>
+            <th>Name</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
            
         </tr>
     </thead>
     <tbody id="productList">
         <?php
-        if(isset($customers)){
-            foreach($customers as $customer){
+        if(isset($detailOrders)){
+            foreach($detailOrders as $detailOrder){
         ?>
         <tr>
-            <td><?php echo $customer["id"]?></td>
-            <td><?php echo $customer["email"]?></td>
-            <td><?php echo $customer["password"]?></td>
-            <td><?php echo $customer["name"]?></td>
+            <td><?php echo $detailOrder["order_id"]?></td>
+            <td><?php echo $detailOrder["name"]?></td>
+            <td><?php echo $detailOrder["unit_price"]?></td>
+            <td><?php echo $detailOrder["quantity"]?></td>
             
         </tr>
         <?php

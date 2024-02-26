@@ -10,16 +10,16 @@ class BaseModel extends Database {
     }
 
     //read data //
-    public function getAllData($table,$select=['*'] ,$orderBy=[],$limit=25){
+    public function getAllData($table,$select=['*'] ,$orderBy=[],){
         $orderByString=implode(' ',$orderBy);
         $column= implode(',',$select);
         if($orderByString){
-            $sql = "SELECT ${column} FROM ${table} ORDER BY ${orderByString} LIMIT ${limit}";
+            $sql = "SELECT ${column} FROM ${table} ORDER BY ${orderByString}";
             // die($sql);
 
             
         }else{
-            $sql = "SELECT ${column} FROM ${table} LIMIT ${limit}";
+            $sql = "SELECT ${column} FROM ${table} ";
             die($sql);
         }
 
@@ -156,11 +156,27 @@ class BaseModel extends Database {
 
     }
 
-    private function _query($sql){
-       return  mysqli_query($this->connect,$sql);
+    public function findByOrderId($table,$id){
+            $sql= "SELECT ${table}.id, ${table}.order_id, ${table}.quantity, ${table}.unit_price, products.name
+            FROM ${table}
+            JOIN products ON ${table}.product_id = products.id
+            WHERE ${table}.order_id = $id";
+            $query = $this->_query($sql);
+            $query = $this->_query($sql);
+            $data=[];
+            //Mỗi lần lấy ra được 1 bản ghi thông qua câu lệnh mysqli_fetch_assoc($query)
+            while($row = mysqli_fetch_assoc($query)){
+                array_push($data,$row);
+            }
+            return $data;
+            
     }
 
 
+
+    private function _query($sql){
+       return  mysqli_query($this->connect,$sql);
+    }
 }
 
 ?>

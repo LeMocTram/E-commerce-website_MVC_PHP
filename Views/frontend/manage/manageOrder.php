@@ -40,7 +40,11 @@ if (!myToken) {
                     <td><?php echo $order["email"]?></td>
                     <td><?php echo $order["phone"]?></td>
                     <td><?php echo $order["method"]?></td>
-                    <td><i class="fa-solid fa-circle-info"></i></td>
+                    <td>
+                        <a href="?controller=dashboard&action=detailOrder&id=<?php echo $order["id"]?>">
+                            <i class="fa-solid fa-circle-info"></i> 
+                        </a>
+                    </td>
                     
                 </tr>
                 <?php
@@ -54,3 +58,5 @@ if (!myToken) {
                 ?>
             </tbody>
         </table>
+
+

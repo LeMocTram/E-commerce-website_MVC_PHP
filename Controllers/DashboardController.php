@@ -8,14 +8,16 @@ class DashboardController extends BaseController {
         private $productModel;
         private $orderModel;
         private $customerModel;
+        private $orderDetailModel;
         public function __construct(){
                 $this->loadModel('ProductModel');
                 $this->productModel = new ProductModel;
                 $this->loadModel('OrderModel');
                 $this->orderModel = new OrderModel;
-                 $this->loadModel('CustomerModel');
+                $this->loadModel('CustomerModel');
                 $this->customerModel = new CustomerModel;
-
+                $this->loadModel('OrderDetailModel');
+                $this->orderDetailModel = new OrderDetailModel;
             }
 
         public function index(){
@@ -96,6 +98,12 @@ class DashboardController extends BaseController {
             $sort=['column'=>'id','order'=>'asc'];
             $customer =  $this->customerModel->getAllCustomers($selectColumn,$sort);
             return $this->loadView('frontend.manage.dashboard',['customers'=>$customer]);
+        }
+
+        public function detailOrder(){
+            $id = $_GET['id'];
+            $detailOrder =  $this->orderDetailModel->getDetailOrders($id);
+            return $this->loadView('frontend.manage.dashboard',['detailOrders'=>$detailOrder]);
 
         }
 

@@ -13,12 +13,6 @@
                     <input name="registered-email" type="email" placeholder="Email" require>
                     <input name="registered-password" type="password" placeholder="Password" require>
                     <button type="submit" name="submit" class="btn-auth">Đăng ký</button>
-
-                    <span>HOẶC</span>
-                    <div class="auth-with">
-                        <button class="auth-with-fb"> <i class="fa-brands fa-facebook"></i> Facebook</button>
-                        <button class="auth-with-gg"><i class="fa-brands fa-google"></i> Google</button>
-                    </div>
                     <div class="policy">
                         Bằng việc đăng ký, bạn đã đồng ý với 4 MEN về
                         <a href="#">Điều khoản dịch vụ</a>

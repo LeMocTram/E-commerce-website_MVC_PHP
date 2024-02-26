@@ -6,6 +6,10 @@ class OrderDetailModel extends BaseModel{
     public function store($result,$data){
         return $this->storeOrderDetail(self::TABLE,$result,$data);
     }
+
+    public function getDetailOrders($id){
+         return $this->findByOrderId(self::TABLE,$id);
+    }
 }
 
 ?>
