@@ -1,5 +1,5 @@
 <ul class="dir-cart">
-    <li class="dir-name"><a href="#">4MEN</a></li>
+    <li class="dir-name"><a href="#">ClothesForBoy</a></li>
     <li class="dir-name">/</li>
     <li class="dir-name"><a href="#">Đơn đặt hàng</a></li>
 </ul>

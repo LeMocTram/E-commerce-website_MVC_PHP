@@ -1,7 +1,7 @@
 <div class="dir-product">
      <div class="col-md-12">
         <ul style="display:flex; ">
-            <li class="dir-name"><a href="?controller=home">4MEN</a></li>
+            <li class="dir-name"><a href="?controller=home">ClothesForBoy</a></li>
             <li class="dir-name">/</li>
             <li class="dir-name">
                 <a href="?controller=home&action=show&category_id=<?php echo $productDetail['category_id']?>">

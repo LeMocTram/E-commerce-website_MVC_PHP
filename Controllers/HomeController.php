@@ -172,7 +172,7 @@ class HomeController extends BaseController {
                         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                         //Recipients
-                        $mail->setFrom('19522373@gm.uit.edu.vn', '4men');
+                        $mail->setFrom('19522373@gm.uit.edu.vn', 'ClothesForBoy');
                         $mail->addAddress($_POST["email"], $_POST["fullname"]);     //Add a recipient
                         $mail->addCC('19522373@gm.uit.edu.vn');
                 

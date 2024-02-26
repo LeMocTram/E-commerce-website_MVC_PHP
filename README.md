@@ -2,6 +2,8 @@
 
 ## Giới thiệu
 ClothesForBoy là một trang web bán quần áo dành cho nam giới. Trang web cung cấp các tính năng đăng nhập, đặt hàng và quản lý sản phẩm, với giao diện thân thiện và dễ sử dụng.
+## Design Database
+![Database Design](Views/frontend/img/database.png)
 
 ## Công nghệ sử dụng
 - HTML/CSS/JS: Phát triển giao diện người dùng.
