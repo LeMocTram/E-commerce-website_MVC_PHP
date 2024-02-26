@@ -1,47 +1,48 @@
-# ClothesForBoy - Trang web bán quần áo
+# ClothesForBoy - Men's Clothing E-commerce Website
 
-## Giới thiệu
-ClothesForBoy là một trang web bán quần áo dành cho nam giới. Trang web cung cấp các tính năng đăng nhập, đặt hàng và quản lý sản phẩm, với giao diện thân thiện và dễ sử dụng.
-## Design Database
+## Introduction
+ClothesForBoy is an e-commerce website specializing in men's clothing. The website provides features such as user login, ordering, and product management, with a user-friendly and easy-to-use interface.
+
+## Database Design
 ![Database Design](Views/frontend/img/database.png)
 
-## Công nghệ sử dụng
-- HTML/CSS/JS: Phát triển giao diện người dùng.
-- PHP: Xử lý logic trang web.
-- MySQL: Lưu trữ dữ liệu của trang web.
-- JWT (JSON Web Tokens): Xác thực và quản lý phiên đăng nhập.
+## Technologies Used
+- HTML/CSS/JS/PHP: Frontend development.
+- PHP: Backend logic.
+- MySQL: Database management.
+- JWT (JSON Web Tokens): Authentication and session management.
 
-## Tính năng
-1. **Đăng nhập và quản lý tài khoản:**
-   - Người dùng có thể đăng nhập với tư cách khách hàng hoặc quản trị viên.
-   - Quản trị viên sử dụng JWT để đăng nhập vào trang quản lý.
+## Features
+1. **User Authentication and Account Management:**
+   - Users can log in as customers or administrators.
+   - Administrators use JWT for logging into the management dashboard.
 
-2. **Đặt hàng:**
-   - Khách hàng có thể đặt hàng sau khi đăng nhập hoặc ở dạng GUEST.
-   - Thông tin đặt hàng được lưu trong cơ sở dữ liệu và gửi email thông báo cho khách hàng.
+2. **Order Placement:**
+   - Customers can place orders after logging in or as guests.
+   - Order information is stored in the database and email notifications are sent to customers.
 
-## Trang Dashboard
-- **Link:** [Trang Dashboard](https://clothesforboy.000webhostapp.com/index.php?controller=login)
+## Dashboard Page
+- **Link:** [Dashboard Page](https://clothesforboy.000webhostapp.com/index.php?controller=login)
 - **User:** admin
 - **Password:** 123456
 
-## Trang Chủ
-- **Link:** [Trang Chủ](https://clothesforboy.000webhostapp.com/index.php?controller=home)
+## Home Page
+- **Link:** [Home Page](https://clothesforboy.000webhostapp.com/index.php?controller=home)
 
-## Hướng dẫn cài đặt
-1. Clone repository từ link Github.
-2. Cấu hình file cấu hình `config.php` để kết nối với cơ sở dữ liệu MySQL.
-3. Chạy file SQL để tạo bảng dữ liệu và dữ liệu mẫu nếu cần.
-4. Truy cập vào trang chủ và bắt đầu sử dụng.
+## Installation Guide
+1. Clone the repository from the Github link.
+2. Configure the `config.php` file to connect to the MySQL database.
+3. Run the SQL file to create database tables and sample data if needed.
+4. Access the home page and start using the website.
 
-## Tính năng cần phát triển trong tương lai
-- Thêm tính năng tìm kiếm và lọc sản phẩm.
-- Tối ưu hóa trang web để tăng tốc độ tải trang.
-- Thêm tính năng thanh toán trực tuyến.
+## Future Development
+- Implement search and product filtering features.
+- Optimize the website for faster page loading.
+- Integrate online payment functionality.
 
 ## Contributor
-- Tên: Trầm
+- Name: Tram
 - Email: tram20012001@gmail.com
 
 ## License
-[Thông tin về giấy phép sử dụng, ví dụ: MIT License]
+[License information, e.g., MIT License]
