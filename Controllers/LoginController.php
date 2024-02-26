@@ -26,15 +26,20 @@ class LoginController extends BaseController{
                 $username= $_POST["username"];
                 $password_input=$_POST["password"];
                 if(empty($_POST["username"])||empty($_POST["password"])){
-                     $this->loadView('frontend.manage.login',["result"=>false]);
+                    $adminLoginFalse="adminLoginFalse";
+                    echo "<script>";
+                    echo "localStorage.setItem('adminLoginFalse', '" . $adminLoginFalse . "');";
+                    echo "</script>";
+                    echo "<script>location.href = '?controller=login';</script>";
+                    exit();
                 }
                 $result = $this->loginModel->login($username);
-                if( mysqli_num_rows($result)){
-                    while ($row = mysqli_fetch_array($result)) {
+                if( mysqli_num_rows($result)>0){
+                        while ($row = mysqli_fetch_array($result)) {
                         $id=$row["id"];
                         $username=$row["username"];
                         $password=$row["password"];
-                    }
+                        }
                     if((hash('md5',$password_input)===$password)){
                             $token = $this->generateToken($username);
                             $this->loadView('frontend.manage.proccessToken',["token"=>$token]);
@@ -47,6 +52,13 @@ class LoginController extends BaseController{
                             echo "<script>location.href = '?controller=login';</script>";
                             exit();
                     }
+                }else {
+                            $adminLoginFalse="adminLoginFalse";
+                            echo "<script>";
+                            echo "localStorage.setItem('adminLoginFalse', '" . $adminLoginFalse . "');";
+                            echo "</script>";
+                            echo "<script>location.href = '?controller=login';</script>";
+                            exit();
                 }
             }
         }

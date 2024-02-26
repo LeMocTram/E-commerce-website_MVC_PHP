@@ -37,7 +37,10 @@
 </body>
 <script>
     var messageLogin = localStorage.getItem('adminLoginFalse');   
-    if(messageLogin ===)         
+    if(messageLogin ==='adminLoginFalse')   {
+        document.getElementById('message-login').innerText = 'Login false!';
+        localStorage.removeItem('adminLoginFalse');
+    }      
 </script>
 
 <style>

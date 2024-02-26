@@ -9,9 +9,9 @@
                     <span id="btn-close-form-register">x</span>
                 </div>
                 <form class="auth-form-body" action="?controller=home&action=register" method="post">
-                    <input name="registered-name" type="text" placeholder="Name" require>
-                    <input name="registered-email" type="email" placeholder="Email" require>
-                    <input name="registered-password" type="password" placeholder="Password" require>
+                    <input name="registered-name" type="text" placeholder="Name" required>
+                    <input name="registered-email" type="email" placeholder="Email" required>
+                    <input name="registered-password" type="password" minlength="6" placeholder="Password" required>
                     <button type="submit" name="submit" class="btn-auth">Đăng ký</button>
                     <div class="policy">
                         Bằng việc đăng ký, bạn đã đồng ý với 4 MEN về
@@ -36,7 +36,7 @@
                 </div>
                 <form class="auth-form-body" action="?controller=home&action=auth" method="post">
                     <input name="eCustomer" type="email" placeholder="Email" required>
-                    <input name="pCustomer" type="password" placeholder="Password" required>
+                    <input name="pCustomer" type="password" minlength="6" placeholder="Password" required>
                     <button id="log-in" type="submit" name="submit" class="btn-auth">Đăng nhập</button>
                     <span>HOẶC</span>
                     <div class="auth-with">
