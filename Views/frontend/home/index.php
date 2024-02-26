@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,42 +50,23 @@
             </div>
         </div>
        <?php 
-
         // echo $_SERVER['REQUEST_URI'];
         if(!isset($_GET['action'])){
-            include 'Views\frontend\home\homePage.php';
+            include 'Views/frontend/home/homePage.php';
         }else{
             if($_GET['action']==='show'){
-                include 'Views\frontend\home\showProducts.php';
+                include 'Views/frontend/home/showProducts.php';
             }elseif($_GET['action']==='detail'){
-                include 'Views\frontend\home\detail.php';
+                include 'Views/frontend/home/detail.php';
             }elseif($_GET['action']==='cart'){
-                include 'Views\frontend\home\cart.php';
+                include 'Views/frontend/home/cart.php';
             }
-            // elseif(($_GET['action']==='auth')&&(isset($_COOKIE["id"]))){
-            //     include 'Views\frontend\home\homePage.php';
-            // }
        }
 
-        // if(!isset($_GET['category_id'])){
-        //     /*Home page*/  
-        //     include 'Views\frontend\home\homePage.php';
-        //     // include 'Views\frontend\home\detail.php';
-        // }else{
-        //     /*Show product*/  
-        //     include 'Views\frontend\home\showProducts.php';
-        // }
-        // // if(!isset($_GET['category_id'])){
-        // //     /*Home page*/  
-        // //     include 'Views\frontend\home\homePage.php';
-        // // }else{
-        // //     /*Show product*/  
-        // //     include 'Views\frontend\home\showProducts.php';
-        // // }
         ?>
     </div>
     <div class="footer">
-        <?php include('Views\frontend\partitions\footer.php'); ?>
+        <?php include('Views/frontend/partitions/footer.php'); ?>
     </div>
     
     

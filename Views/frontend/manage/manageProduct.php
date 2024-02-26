@@ -1,4 +1,4 @@
- <h1 style="text-align: center; margin-bottom:100px;">LIST OF PRODUCTS</h1>
+ <h1 style="text-align: center; margin-bottom:100px;">PRODUCT MANAGEMENT</h1>
 
 <div class="wrapper-btn-add ">
     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -22,7 +22,7 @@
                     <input type="file"  name="image" required=""  autocomplete="off">
                     <!-- <input type="file"  name="image" required=""  autocomplete="off"> -->
                     <label for="productPrice">Price:</label>
-                    <input type="text"  name="price" required="" autocomplete="off">
+                    <input type="number"  name="price" required="" autocomplete="off">
                     <label for="productPrice">Category:</label><br>
                     <input type="radio"  name="category_id" checked value="1">
                     <label for="shirt">Shirt</label><br>

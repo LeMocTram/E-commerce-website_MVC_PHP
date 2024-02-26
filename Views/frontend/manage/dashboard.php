@@ -1,22 +1,3 @@
-<?php
-if(!isset($_COOKIE["id"])){
-    header('Location: ?controller=login');
-}
-// else{
-//      $value = $_COOKIE['id'];
-//     echo "Giá trị của cookie là: " . $value;
-//     die;
-// }
-//Check valid
-// if(!isset($_SESSION["id"])){
-//     header('Location: ?controller=login');
-// }
-// if(!isset($_POST['result'])){
-//     header('Location: ?controller=login');
-// }
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +9,16 @@ if(!isset($_COOKIE["id"])){
 
 </head>
 <body>
+<script>
+    var myToken = localStorage.getItem('token');
+
+// Nếu không có biến trong localStorage
+if (!myToken) {
+    // Chuyển hướng đến trang khác
+    window.location.href = '?controller=login&action=logout';
+}
+
+</script>
 
     <header class="header-dashboard">
         <!-- <h1>Dashboard</h1> -->
@@ -38,7 +29,7 @@ if(!isset($_COOKIE["id"])){
             <li class="dashboard-list-item"><a type="button" class="dashboard-item-link" href="?controller=dashboard">Manage Products</a></li>
             <li class="dashboard-list-item"><a type="button" class="dashboard-item-link" href="?controller=dashboard&action=manageOders">Manage Orders</a></li>
             <li class="dashboard-list-item"><a type="button" class="dashboard-item-link" href="?controller=dashboard&action=manageCustomers">Manage Account Customers</a></li>
-            <li class="dashboard-list-item btn-logout"><a type="button" class="dashboard-item-link" href="?controller=login&action=logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li class="dashboard-list-item btn-logout" id="logoutBtn"><a type="button" class="dashboard-item-link"><i class="fa-solid fa-right-from-bracket"></i></a></li>
 
         </ul>
     </header>
@@ -77,6 +68,10 @@ if(!isset($_COOKIE["id"])){
       ?>
     </style>
 <script>
+
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     var dropdownBtn = document.getElementById('dropdown-btn');
     var menuListDropdown = document.getElementById('menu-list-dropdown');
@@ -88,6 +83,14 @@ document.addEventListener('DOMContentLoaded', function() {
             menuListDropdown.style.display = 'none';
         }
     });
+});
+
+
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    // Xóa dữ liệu từ localStorage
+    localStorage.removeItem('token'); // Thay 'myVariable' bằng tên của biến bạn muốn xóa
+    // Hoặc sử dụng localStorage.clear(); nếu bạn muốn xóa toàn bộ dữ liệu từ localStorage
+    window.location.href = '?controller=login&action=logout';
 });
 </script>
 

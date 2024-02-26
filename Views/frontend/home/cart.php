@@ -70,7 +70,7 @@
                         <th style="width:40px;">SL</th>
                         <th style="width:70px;">Đơn giá</th>
                         <th style="width:70px;">Tổng</th>
-                        <th style="width:50px;">Xóa</th>
+                        <!-- <th style="width:50px;">Xóa</th> -->
                     </tr>
                 </thead>
                 <tbody id="cartBody">
@@ -112,27 +112,12 @@
 </form>
 <script>
 
-        // Lắng nghe sự kiện submit của biểu mẫu
-    // document.querySelector('form').addEventListener('submit', function(event) {
-    //     // Kiểm tra xem một trong hai phương thức thanh toán đã được chọn hay chưa
-    //     var codChecked = document.getElementById('cod').checked;
-    //     var cashChecked = document.getElementById('cash').checked;
 
-    //     // Nếu không có phương thức thanh toán nào được chọn
-    //     if (!codChecked && !cashChecked) {
-    //         // Ngăn chặn hành vi mặc định của sự kiện submit
-    //         event.preventDefault();
-    //         // Hiển thị thông báo yêu cầu chọn hình thức thanh toán
-    //         alert('Vui lòng chọn một hình thức thanh toán.');
-    //     }
-    // });
-
-
-    var idCustomer = getCookie('idCustomer');
+    var idCustomer = localStorage.getItem('idCustomer');
     console.log("idCustomer",idCustomer);
     document.getElementById('idCustomer').value = idCustomer;
 
-// Lấy dữ liệu từ localStorage
+    // Lấy dữ liệu từ localStorage
     var myData = JSON.parse(localStorage.getItem("cartItem"));
     console.log(myData);
     // Lấy phần tử tbody để đưa dữ liệu vào
@@ -185,13 +170,13 @@
             tr.appendChild(tdTotal);
 
             // Tạo phần tử td cho nút xóa
-            var tdDelete = document.createElement("td");
-            var btnDelete = document.createElement("input");
-            btnDelete.type = "button";
-            btnDelete.className = "btn btn-default btn-xs btnDelete";
-            btnDelete.value = "Xóa";
-            tdDelete.appendChild(btnDelete);
-            tr.appendChild(tdDelete);
+            // var tdDelete = document.createElement("td");
+            // var btnDelete = document.createElement("input");
+            // btnDelete.type = "button";
+            // btnDelete.className = "btn btn-default btn-xs btnDelete";
+            // btnDelete.value = "Xóa";
+            // tdDelete.appendChild(btnDelete);
+            // tr.appendChild(tdDelete);
 
             // Thêm phần tử tr vào tbody
             tbody.appendChild(tr);
@@ -211,18 +196,18 @@
         trEmpty.appendChild(tdEmpty);
         tbody.appendChild(trEmpty);
     }
-var cartItems = JSON.parse(localStorage.getItem("cartItem"));
+    var cartItems = JSON.parse(localStorage.getItem("cartItem"));
 
-// Kiểm tra xem danh sách có dữ liệu hay không
-if (cartItems && cartItems.length > 0) {
-    // Chuyển đổi danh sách sản phẩm thành chuỗi JSON
-    var cartItemsJSON = JSON.stringify(cartItems);
-    
-    // Lấy phần tử input hidden bằng id
-    var cartDataInput = document.getElementById("cartData");
-    
-    // Đặt giá trị cho phần tử input hidden
-    cartDataInput.value = cartItemsJSON;
-}
+    // Kiểm tra xem danh sách có dữ liệu hay không
+    if (cartItems && cartItems.length > 0) {
+        // Chuyển đổi danh sách sản phẩm thành chuỗi JSON
+        var cartItemsJSON = JSON.stringify(cartItems);
+        
+        // Lấy phần tử input hidden bằng id
+        var cartDataInput = document.getElementById("cartData");
+        
+        // Đặt giá trị cho phần tử input hidden
+        cartDataInput.value = cartItemsJSON;
+    }
 
 </script>

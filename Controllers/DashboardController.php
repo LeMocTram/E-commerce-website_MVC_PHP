@@ -43,13 +43,16 @@ class DashboardController extends BaseController {
             'category_id'=> $_POST["category_id"]
         ];
             $this->productModel->store($data);
-            header('Location: ?controller=dashboard');
+            // header('Location: ');
+            echo "<script>location.href = '?controller=dashboard';</script>";
 
         }
         public function delete(){
             $id=$_GET['id'];
             $this->productModel->deleteProduct($id);
-            header('Location: ?controller=dashboard');
+            // header('Location: ?controller=dashboard');
+            echo "<script>location.href = '?controller=dashboard';</script>";
+
         }
         public function edit(){
             $id=$_GET['id'];
@@ -77,7 +80,8 @@ class DashboardController extends BaseController {
 
             }
             $this->productModel->updateData($id,$data);
-            header('Location: ?controller=dashboard');
+            echo "<script>location.href = '?controller=dashboard';</script>";
+            // header('Location: ?controller=dashboard');
             
         }
         public function manageOders(){

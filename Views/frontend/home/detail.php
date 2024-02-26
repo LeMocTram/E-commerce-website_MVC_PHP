@@ -3,7 +3,21 @@
         <ul style="display:flex; ">
             <li class="dir-name"><a href="?controller=home">4MEN</a></li>
             <li class="dir-name">/</li>
-            <li class="dir-name"><a href="?controller=home&action=show&category_id=<?php echo $productDetail['category_id']?>"></a></li>
+            <li class="dir-name">
+                <a href="?controller=home&action=show&category_id=<?php echo $productDetail['category_id']?>">
+                    <?php
+                        if ($productDetail['category_id']==='1') {
+                            echo "ÁO NAM";
+                        }elseif ($productDetail['category_id']==='2') {
+                            echo "QUẦN NAM";
+                        }elseif ($productDetail['category_id']==='3') {
+                            echo "GIÀY DÉP";
+                        }else{
+                            echo "PHỤ KIỆN";
+                        }
+                    ?>
+                </a>
+            </li>
             <li class="dir-name">/</li>
             <li class="dir-name"><a href="#"><?php echo $productDetail['name']?></a></li>
         </ul>
@@ -82,7 +96,8 @@ if(isset($productDetail)){
                 </div>
                 <div class="row wraps-btn">
                     <div class="col-md-6 col-sm-6 col-xs-6">
-                        <button class="btn-buy" onclick="getProductInfor('<?php echo htmlspecialchars(json_encode($productDetail), ENT_QUOTES, 'UTF-8'); ?>')"><a href="?controller=home&action=cart"><i class="fa-solid fa-cart-shopping"></i> Đăng ký mua</a></button>
+                        <button class="btn-buy" onclick="getProductInfor('<?php echo htmlspecialchars(json_encode($productDetail), ENT_QUOTES, 'UTF-8'); ?>')">
+                        <a href="?controller=home&action=cart"><i class="fa-solid fa-arrow-right"></i><i class="fa-solid fa-cart-shopping"></i> Đăng ký mua <i class="fa-solid fa-arrow-left"></i></a></button>
                     </div>
                     <div class="addToCart col-md-6 col-sm-6 col-xs-6">
                         <a class="addToCart-link" onclick="getProductInfor('<?php echo htmlspecialchars(json_encode($productDetail), ENT_QUOTES, 'UTF-8'); ?>')" > + Thêm vào giỏ hàng</a>

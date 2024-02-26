@@ -1,5 +1,4 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -51,71 +50,90 @@ class HomeController extends BaseController {
             $this->loadView('frontend.home.index');
         }
 
-    
-
-
         // Customers Login .....
         public function auth(){
             if(empty($_POST['eCustomer']) || empty($_POST['pCustomer'])) {
                 echo "Vui lòng điền đầy đủ thông tin đăng nhập.";
                 return; // Kết thúc hàm nếu không đủ thông tin
             }
-                $eCustomerInput = $_POST["eCustomer"];
-                $pCustomerInput = $_POST["pCustomer"];
-                $result = $this->homeModel->getpCustomer($eCustomerInput);
-                if(mysqli_num_rows($result) > 0) {
-                    $row = mysqli_fetch_array($result);
-                    $id = $row["id"];
-                    $eCustomer = $row["email"];
-                    $pCustomer = $row["password"];
-                    
-                    // Kiểm tra mật khẩu
-                    if((hash('md5',$pCustomerInput)===$pCustomer)){
-                            setcookie('idCustomer', $id, time() + 3600, "/");
-                            setcookie("cookieCustomerFromSV", $pCustomer, time() + 3600, "/");
-                            header('Location: ?controller=home');
-                    }else{
-                            setcookie('passwordWrong', 'false', time() + 3600, "/");
-                            header('Location: ?controller=home');
-                    }
+            $eCustomerInput = $_POST["eCustomer"];
+            $pCustomerInput = $_POST["pCustomer"];
+            $result = $this->homeModel->getpCustomer($eCustomerInput);
+            if(mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_array($result);
+                $id = $row["id"];
+                $eCustomer = $row["email"];
+                $pCustomer = $row["password"];
+                
+                // Kiểm tra mật khẩu
+                if((hash('md5',$pCustomerInput)===$pCustomer)){
+                    $idCustomer=$id;
+                    $cookieCustomerFromSV="cookieCustomerFromSV";
+                    echo "<script>";
+                    echo "localStorage.setItem('idCustomer', '" . $idCustomer . "');";
+                    echo "localStorage.setItem('cookieCustomerFromSV', '" . $cookieCustomerFromSV . "');";
+                    echo "</script>";
+                    echo "<script>location.href = '?controller=home';</script>";
+                    // echo "<script>location.href = '?controller=home';</script>";
+                    // die;
+                    // exit(); // Dừng thực thi sau khi chuyển hướng
                 } else {
-                        setcookie('noExist', 'false', time() + 3600, "/");
-                        header('Location: ?controller=home');
+                    $passwordWrong = "passwordWrong";
+                    echo "<script>";
+                    echo "localStorage.setItem('passwordWrong', '" . $passwordWrong . "');";
+                    echo "</script>";
+                    echo "<script>location.href = '?controller=home';</script>";
+                    exit(); // Dừng thực thi sau khi chuyển hướng
                 }
+            } else {
+                $accNoExist="noExist";
+                echo "<script>";
+                echo "localStorage.setItem('accNoExist', '" . $accNoExist . "');";
+                echo "</script>";
+                echo "<script>location.href = '?controller=home';</script>";
+                exit(); // Dừng thực thi sau khi chuyển hướng
+            }
         }
         // Customers Register
         public function register (){
             if(empty($_POST['registered-name']) || empty($_POST['registered-email']) || empty($_POST['registered-password'])) {
                 // echo "Vui lòng điền đầy đủ thông tin đăng nhập.";
                 return; // Kết thúc hàm nếu không đủ thông tin
-            }else{
+            } else {
                 $nCustomer = $_POST['registered-name'];
                 $eCustomer = $_POST['registered-email'];
                 $pCustomer = hash('md5',$_POST['registered-password']);
                 $result = $this->homeModel->registerAccount($eCustomer,$pCustomer,$nCustomer);
 
-                // var_dump($result);
-                 if ($result===false) {
-                        setcookie('emailExist', 'true', time() + 3600, "/");
-                        header('Location: ?controller=home');
-                    } else {
-                        setcookie('createSuccess', 'true', time() + 3600, "/");
-                        header('Location: ?controller=home');
-                    }
+                if ($result===false) {
+                    $emailExist="emailExist";
+                    echo "<script>";
+                    echo "localStorage.setItem('emailExist', '" . $emailExist . "');";
+                    echo "</script>";
+                    echo "<script>location.href = '?controller=home';</script>";
+                    exit();
+                } else {
+                    $createSuccess="createSuccess";
+                    echo "<script>";
+                    echo "localStorage.setItem('createSuccess', '" . $createSuccess . "');";
+                    echo "</script>";
+                    echo "<script>location.href = '?controller=home';</script>";
+                    // exit();
+                    echo "<script>location.href = '?controller=home';</script>";
+                    // exit();  
                 }
+            }
 
         }
 
 
         public function order(){
             if($_SERVER["REQUEST_METHOD"] === "POST"){
-                // $cartData = $_POST["cartData"];
                 $arr = array($_POST["address"],$_POST["ward"],$_POST["districts"],$_POST["provinces"]);
                 $arrAddress = implode(", ", $arr);
                 $cartData = json_decode($_POST["cartData"], true);
                 if($_POST["idCustomer"]===""){
                     $data = [
-                        // 'customer_id'=> $_POST["idCustomer"],
                         'fullname'=> $_POST["fullname"],
                         'phone'=> $_POST["phone"],
                         'email'=> $_POST["email"],
@@ -124,7 +142,7 @@ class HomeController extends BaseController {
                         'note'=> $_POST["note"],
                         'method'=> $_POST["method"]
                     ];
-                }else{
+                } else {
                     $data = [
                         'customer_id'=> $_POST["idCustomer"],
                         'fullname'=> $_POST["fullname"],
@@ -141,8 +159,6 @@ class HomeController extends BaseController {
 
                 if(isset($result)&& is_int($result)){
                     $this->orderDetailModel->store($result,$cartData);
-                    
-
                     $mail = new PHPMailer(true);
 
                     try {
@@ -199,22 +215,19 @@ class HomeController extends BaseController {
                         $mail->Body = $body;
 
                         $mail->send();
-                        // echo 'Message has been sent';
                     } catch (Exception $e) {
                         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     }
-                    setcookie('sendOrder', 'true', time() + 3600, "/");
-                    header('Location: ?controller=home');
-
-
-                    
-                }else{
-                    echo "Luu that bai";
+                    $sendOrder="success";
+                    echo "<script>";
+                    echo "localStorage.setItem('sendOrder', '" . $sendOrder . "');";
+                    echo "</script>";
+                    echo "<script>location.href = '?controller=home';</script>";
+                } else {
+                    echo "Lưu thất bại";
                 }
-                die;
+                // die; // Dừng thực thi sau khi xử lý xong
             }
         }
-
 }
-
 ?>

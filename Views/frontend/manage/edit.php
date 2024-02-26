@@ -1,13 +1,12 @@
-<?php
-if(!isset($_COOKIE["id"])){
-    header('Location: ?controller=login');
+<script>
+    var myToken = localStorage.getItem('token');
+
+// Nếu không có biến trong localStorage
+if (!myToken) {
+    // Chuyển hướng đến trang khác
+    window.location.href = '?controller=login&action=logout';
 }
-// if(!isset($_SESSION["id"])){
-//     header('Location: ?controller=login');
-// }
-
-?>
-
+</script>
 <!-- <!DOCTYPE html>
 <html lang="en">
 <head>

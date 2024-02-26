@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,14 +18,15 @@
 				<input type="password" placeholder="Password"  id="password" name='password' readonly onfocus="this.removeAttribute('readonly');" required />
 			</div>
 			<div>
+                <h5 id="message-login" style="color:red;"></h5>
                 <?php 
-            if(isset($data["result"])){
-                if($data["result"]==true){
-
-                }else{
-                    echo '<h5 style="color:red;">Log in fail</h5>';
-                }
-            }
+            // if(isset($data["result"])){
+            //     if(!$data["result"]==false){
+            //         echo '<h5 style="color:red;">Log in fail</h5>';
+            //         echo "HEllo";
+            //         die;
+            //     }
+            // }
             ?>
 				<input type="submit" name="submit" value="Log in" />
 				<a href="#">Lost your password?</a>
@@ -37,6 +37,10 @@
 	</section><!-- content -->
 </div><!-- container -->
 </body>
+<script>
+    var messageLogin = localStorage.getItem('adminLoginFalse');   
+    if(messageLogin ===)         
+</script>
 
 <style>
         body {

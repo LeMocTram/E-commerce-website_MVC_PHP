@@ -1,17 +1,13 @@
-<?php
-if(!isset($_COOKIE["id"])){
-    header('Location: ?controller=login');
+<script>
+    var myToken = localStorage.getItem('token');
+
+// Nếu không có biến trong localStorage
+if (!myToken) {
+    // Chuyển hướng đến trang khác
+    window.location.href = '?controller=login&action=logout';
 }
-
-// if(isset($customers)){
-//     echo '<pre>';
-//     print_r($customers);
-// }
-
-?>
-
- <h1 style="text-align: center; margin-bottom:100px; ">List of customer accounts</h1>
-
+</script>
+ <h1 style="text-align: center; margin-bottom:100px; ">MANAGE CUSTOMER ACCOUNTS</h1>
 
  <table>
             <thead>

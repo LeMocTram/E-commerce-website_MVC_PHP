@@ -110,7 +110,7 @@ class BaseModel extends Database {
 
     // Create account
     public function createAccount($table,$eCustomer,$pCustomer,$nCustomer){
-        $sql = "INSERT INTO ${table} (id, name, email, password) VALUES ('', '${nCustomer}', '${eCustomer}', '${pCustomer}')";
+        $sql = "INSERT INTO ${table} (name, email, password) VALUES ('${nCustomer}', '${eCustomer}', '${pCustomer}')";
         // echo $sql;
         // var_dump($sql);
         $this->_query($sql);
@@ -155,14 +155,6 @@ class BaseModel extends Database {
         // die;
 
     }
-
-
-    // Manage Model
-    public function getAllOrders(){
-
-    }
-
-
 
     private function _query($sql){
        return  mysqli_query($this->connect,$sql);

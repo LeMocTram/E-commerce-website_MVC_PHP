@@ -5,6 +5,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 
+
 class LoginController extends BaseController{
 
         private $loginModel;
@@ -25,7 +26,7 @@ class LoginController extends BaseController{
                 $username= $_POST["username"];
                 $password_input=$_POST["password"];
                 if(empty($_POST["username"])||empty($_POST["password"])){
-                     $this->loadView('frontend.manage.login',["result"=>$result_mess]);
+                     $this->loadView('frontend.manage.login',["result"=>false]);
                 }
                 $result = $this->loginModel->login($username);
                 if( mysqli_num_rows($result)){
@@ -35,14 +36,16 @@ class LoginController extends BaseController{
                         $password=$row["password"];
                     }
                     if((hash('md5',$password_input)===$password)){
-                            // $token = $this->generateToken($username);
-                            // $_SESSION["id"]=$id;
-                            // setcookie("id","username", time()+3600, "/",0);
-                            setcookie("id", $password, time() + 3600, "/"); 
-                            header('Location: ?controller=dashboard');
-                            // $this->loadView('frontend.manage.proccessToken',["token"=>$token]);
+                            $token = $this->generateToken($username);
+                            $this->loadView('frontend.manage.proccessToken',["token"=>$token]);
                     }else{
-                            $this->loadView('frontend.manage.login',["result"=>$result_mess]);
+                            // $this->loadView('frontend.manage.login',["result"=>false]);
+                            $adminLoginFalse="adminLoginFalse";
+                            echo "<script>";
+                            echo "localStorage.setItem('adminLoginFalse', '" . $adminLoginFalse . "');";
+                            echo "</script>";
+                            echo "<script>location.href = '?controller=login';</script>";
+                            exit();
                     }
                 }
             }
@@ -55,7 +58,9 @@ class LoginController extends BaseController{
                 // Xác minh và giải mã token
                $decoded = JWT::decode($token, new Key($this->key, 'HS256'));
                 if(!isset($decoded)){
-                    header('Location: ?controller=login');
+                    // header('Location: ?controller=login');
+                    echo "<script>location.href = '?controller=login';</script>";
+
                 }else{
                     ?>
                     <form id="hiddenForm" action="?controller=dashboard" method="post" style="display: none;">
@@ -84,9 +89,11 @@ class LoginController extends BaseController{
             // cookie or session
             // unset($_SESSION['id']);
             // session_destroy();
-            setcookie('id', "",time()-3600,'/');
+            // setcookie('id', "",time()-3600,'/');
 
-            header('Location: ?controller=login');
+            // header('Location: ?controller=login');
+            echo "<script>location.href = '?controller=login';</script>";
+
 
         }
 

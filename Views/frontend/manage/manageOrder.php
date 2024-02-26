@@ -1,10 +1,15 @@
-<?php
-if(!isset($_COOKIE["id"])){
-    header('Location: ?controller=login');
-}
-?>
+<script>
+    var myToken = localStorage.getItem('token');
 
- <h1 style="text-align: center; margin-bottom:100px;">LIST OF PRODUCTS</h1>
+// Nếu không có biến trong localStorage
+if (!myToken) {
+    // Chuyển hướng đến trang khác
+    window.location.href = '?controller=login&action=logout';
+}
+
+</script>
+
+ <h1 style="text-align: center; margin-bottom:100px;">ORDER MANAGEMENT</h1>
 
 
  <table>
