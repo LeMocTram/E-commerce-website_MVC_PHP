@@ -20,6 +20,22 @@ btnCloseFormLogin.onclick = function () {
 var btnSwitchLogin = document.getElementById('auth-btn-switch-login');
 var btnSwitchRegister = document.getElementById('auth-btn-switch-register');
 
+var modal = document.getElementById('modal');
+var modalBody = document.getElementById('modal-body');
+
+modal.onclick = function (event) {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+        document.getElementById('register-form').style.display = "none";
+        document.getElementById('login-form').style.display = "none";
+    }
+};
+
+modalBody.onclick = function (event) {
+    // Ngăn sự kiện bubbling (lan truyền) lên phần tử modal
+    event.stopPropagation();
+};
+
 btnSwitchLogin.onclick = function () {
     document.getElementById('login-form').style.display = "block";
     document.getElementById('register-form').style.display = "none";

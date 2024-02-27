@@ -161,32 +161,24 @@
 
             // Tạo phần tử td cho giá
             var tdPrice = document.createElement("td");
-            tdPrice.textContent = item.price;
+            tdPrice.textContent = parseInt(item.price).toLocaleString('en-US')+' ₫';
             tr.appendChild(tdPrice);
 
             var totalPrice = item.price * item.quantity;
 
             // Tạo phần tử td cho tổng
             var tdTotal = document.createElement("td");
-            tdTotal.textContent = totalPrice;
+            tdTotal.textContent = parseInt(totalPrice).toLocaleString('en-US')+' ₫';
             tr.appendChild(tdTotal);
 
-            // Tạo phần tử td cho nút xóa
-            // var tdDelete = document.createElement("td");
-            // var btnDelete = document.createElement("input");
-            // btnDelete.type = "button";
-            // btnDelete.className = "btn btn-default btn-xs btnDelete";
-            // btnDelete.value = "Xóa";
-            // tdDelete.appendChild(btnDelete);
-            // tr.appendChild(tdDelete);
 
             // Thêm phần tử tr vào tbody
             tbody.appendChild(tr);
             totalAll += totalPrice;
         });
-        document.getElementById('totalBill').value = totalAll;
-        document.getElementById('sumTotal').innerHTML = totalAll;
-        document.getElementById('sumTotalBill').innerHTML = totalAll;
+        document.getElementById('totalBill').value = parseInt(totalAll).toLocaleString('en-US')+' ₫';
+        document.getElementById('sumTotal').innerHTML = parseInt(totalAll).toLocaleString('en-US')+' ₫';
+        document.getElementById('sumTotalBill').innerHTML = parseInt(totalAll).toLocaleString('en-US')+' ₫';
         
         
     } else {
