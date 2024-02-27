@@ -29,43 +29,20 @@ btnSwitchRegister.onclick = function () {
     document.getElementById('login-form').style.display = "none";
 }
 
-// set cookie
-// function setCookie(name, value, days) {
-//     var expires = "";
-//     if (days) {
-//         var date = new Date();
-//         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-//         expires = "; expires=" + date.toUTCString();
-//     }
-//     document.cookie = name + "=" + (value || "") + expires + "; path=/";
-// }
-
-// function getCookie(name) {
-//     var cookieArray = document.cookie.split(';');
-//     for (var i = 0; i < cookieArray.length; i++) {
-//         var cookiePair = cookieArray[i].split('=');
-//         if (cookiePair[0].trim() === name) {
-//             return decodeURIComponent(cookiePair[1]);
-//         }
-//     }
-//     return null; // Trả về null nếu cookie không tồn tại
-// }
-
-// Function to delete a cookie
-// function deleteCookie(name) {
-//     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-// }
-
 // Function to handle logout
+
 function logout() {
     // Ẩn phần tử "logout" và hiển thị phần tử "user"
     document.getElementById('user').style.display = 'flex';
     document.getElementById('logout').style.display = 'none';
+    document.getElementById('notify-toast').style.display = 'block';
     var myToast = new bootstrap.Toast(document.querySelector('.toast'));
     document.getElementById('notify').innerHTML = "Bạn đã đăng xuất";
     myToast.show();
     setTimeout(function () {
         myToast.hide();
+        document.getElementById('notify-toast').style.display = 'none';
+
     }, 1500);
     localStorage.removeItem('idCustomer');
     localStorage.removeItem('cookieCustomerFromSV');
@@ -81,11 +58,13 @@ if (myCookieValue) {
     document.getElementById('logout').style.display = 'flex';
     var hasShownToast = localStorage.getItem('hasShownToast');
     if (!hasShownToast) {
+        document.getElementById('notify-toast').style.display = 'block';
         var myToast = new bootstrap.Toast(document.querySelector('.toast'));
         document.getElementById('notify').innerHTML = "Đăng nhập thành công";
         myToast.show();
         setTimeout(function () {
             myToast.hide();
+            document.getElementById('notify-toast').style.display = 'none';
         }, 1500);
         localStorage.setItem('hasShownToast', '1');
     }
@@ -97,12 +76,14 @@ if (myCookieValue) {
 // Log-in fail
 var passwordWrong = localStorage.getItem('passwordWrong');
 if (passwordWrong === "passwordWrong") {
+    document.getElementById('notify-toast').style.display = 'block';
     var myToast = new bootstrap.Toast(document.querySelector('.toast'));
     document.getElementById('notify-toast').style.background = 'red';
     document.getElementById('notify').innerHTML = "Sai mật khẩu";
     myToast.show();
     setTimeout(function () {
         myToast.hide();
+        document.getElementById('notify-toast').style.display = 'none';
     }, 1500);
     localStorage.removeItem('passwordWrong');
 
@@ -113,12 +94,14 @@ if (passwordWrong === "passwordWrong") {
 
 var accNoExist = localStorage.getItem('accNoExist');
 if (accNoExist === "noExist") {
+    document.getElementById('notify-toast').style.display = 'block';
     var myToast = new bootstrap.Toast(document.querySelector('.toast'));
     document.getElementById('notify-toast').style.background = 'red';
     document.getElementById('notify').innerHTML = "Tài khoản không tồn tại";
     myToast.show();
     setTimeout(function () {
         myToast.hide();
+        document.getElementById('notify-toast').style.display = 'none';
     }, 1500);
     localStorage.removeItem('accNoExist');
 }
@@ -126,12 +109,14 @@ if (accNoExist === "noExist") {
 // Xử lí đăng kí email đã tồn tại
 var emailExist = localStorage.getItem('emailExist');
 if (emailExist === "emailExist") {
+    document.getElementById('notify-toast').style.display = 'block';
     var myToast = new bootstrap.Toast(document.querySelector('.toast'));
     document.getElementById('notify-toast').style.background = 'red';
     document.getElementById('notify').innerHTML = "Email đã được đăng ký";
     myToast.show();
     setTimeout(function () {
         myToast.hide();
+        document.getElementById('notify-toast').style.display = 'none';
     }, 1500);
     localStorage.removeItem('emailExist');
 
@@ -140,12 +125,13 @@ if (emailExist === "emailExist") {
 // Đăng ký thành công
 var registerSuccess = localStorage.getItem('createSuccess');
 if (registerSuccess === "createSuccess") {
-
+    document.getElementById('notify-toast').style.display = 'block';
     var myToast = new bootstrap.Toast(document.querySelector('.toast'));
     document.getElementById('notify').innerHTML = "Đăng ký thành công";
     myToast.show();
     setTimeout(function () {
         myToast.hide();
+        document.getElementById('notify-toast').style.display = 'none';
     }, 1500);
     localStorage.removeItem('createSuccess');
 }
@@ -155,11 +141,13 @@ if (registerSuccess === "createSuccess") {
 // Gửi đơn hàng
 var sendOrder = localStorage.getItem('sendOrder');
 if (sendOrder === "success") {
+    document.getElementById('notify-toast').style.display = 'block';
     var myToast = new bootstrap.Toast(document.querySelector('.toast'));
     document.getElementById('notify').innerHTML = "Đặt hàng thành công";
     myToast.show();
     setTimeout(function () {
         myToast.hide();
+        document.getElementById('notify-toast').style.display = 'none';
     }, 1500);
     localStorage.removeItem('cartItem');
     localStorage.removeItem('sendOrder');
@@ -227,18 +215,18 @@ function displayCart() {
                             <img class="cart-item-img" src="` + product.image + `" alt="">
                             <div class="cart-item-infor">
                                 <a href="#" class="cart-item-name"><h5>` + product.name + `</h5></a>
-                                <p class="cart-item-price">` + product.price + ` đ</p>
+                                <p class="cart-item-price">` + parseInt(product.price).toLocaleString('en-US') + ` ₫</p>
                                 <p class="cart-item-quantity">Số lượng: ` + product.quantity + `</p>
                                 <button class="btn-remove-item" onclick="removeItem(` + index + `)"><i class="fa-solid fa-trash"></i></button> <!-- Thêm nút xóa sản phẩm -->
                             </div>
                         </li>`;
-        totalPrice += parseFloat(product.price);
+        totalPrice += parseInt(product.price) * product.quantity;
     });
 
     // Append the total price and "Gửi đơn hàng" button only if there are products in the cart
     if (cartItem.length > 0) {
         cartContent += `<div class="cart-item-total">
-                            Tổng: ` + totalPrice.toFixed(3) + `đ
+                            Tổng: ` + totalPrice.toLocaleString('en-US') + ` ₫
                         </div>
                         <div class="cart-btn">
                             <a href="?controller=home&action=cart">Gửi đơn hàng</a>

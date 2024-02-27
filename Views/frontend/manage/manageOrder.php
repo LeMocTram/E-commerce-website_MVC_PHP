@@ -34,7 +34,7 @@ if (!myToken) {
                 <tr>
                     <td><?php echo $order["id"]?></td>
                     <td><?php echo $order["created_at"]?></td>
-                    <td><?php echo $order["total"]?></td>
+                    <td><?php echo  number_format((int)$order["total"]) ."₫"?></td>
                     <td><?php echo $order["fullname"]?></td>
                     <td><?php echo $order["address"]?></td>
                     <td><?php echo $order["email"]?></td>

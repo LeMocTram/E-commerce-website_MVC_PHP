@@ -22,7 +22,7 @@
                                     </span>
                                     <div class="card-body">
                                         <p  class="text-center card-text item-name" title="<?php echo $product["name"]?>" > <?php echo $product["name"]?></p>
-                                        <p  class="text-center card-text item-price"><?php echo $product["price"]."đ"?></p>
+                                        <p  class="text-center card-text item-price"><?php echo number_format((int)$product["price"]) ."₫"?></p>
                                     </div>
                                 </a>
                                 <button onclick="getProductInfor('<?php echo htmlspecialchars(json_encode($product), ENT_QUOTES, 'UTF-8'); ?>')"  class="btn-add-to-cart">

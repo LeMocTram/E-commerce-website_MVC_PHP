@@ -27,7 +27,7 @@ if (!myToken) {
         <tr>
             <td><?php echo $detailOrder["order_id"]?></td>
             <td><?php echo $detailOrder["name"]?></td>
-            <td><?php echo $detailOrder["unit_price"]?></td>
+            <td><?php echo number_format((int)$detailOrder["unit_price"]) ."₫" ?></td>
             <td><?php echo $detailOrder["quantity"]?></td>
             
         </tr>

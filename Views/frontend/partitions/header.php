@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+
     <div class="header-container">
         <div class="logo">
             <a href="?controller=home">
@@ -73,8 +67,6 @@
 
 <!-- Modal  -->
  
-
-</body>
 <style>
     <?php 
     include 'Views/frontend/css/header.css'
@@ -87,4 +79,4 @@
    ?>
 </script>
 
-</html>
+

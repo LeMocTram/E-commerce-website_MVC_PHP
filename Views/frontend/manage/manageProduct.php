@@ -17,12 +17,12 @@
             <div class="modal-body">
                 <form id="productForm" method="post" action='?controller=dashboard&action=add' enctype="multipart/form-data">
                     <label for="productName">Name:</label>
-                    <input type="text"  name="name" required=""  autocomplete="off">
+                    <input type="text"  name="name" required  autocomplete="off">
                     <label for="productImage">Upload Image:</label>
-                    <input type="file"  name="image" required=""  autocomplete="off">
+                    <input type="file"  name="image" required  autocomplete="off">
                     <!-- <input type="file"  name="image" required=""  autocomplete="off"> -->
                     <label for="productPrice">Price:</label>
-                    <input type="number"  name="price" required="" autocomplete="off">
+                    <input type="number"  name="price" required autocomplete="off" min="0">
                     <label for="productPrice">Category:</label><br>
                     <input type="radio"  name="category_id" checked value="1">
                     <label for="shirt">Shirt</label><br>
@@ -76,7 +76,7 @@
                     <td><?php echo $product["id"]?></td>
                     <td><?php echo $product["name"]?></td>
                     <td><?php echo '<img style="max-width:47px;max-height:62px" src="' .  $product["image"] . '" alt="Image">';?></td>
-                    <td><?php echo $product["price"] . 'đ' ?></td>
+                    <td><?php echo number_format((int)$product["price"]) ."₫" ?></td>
                     <td><?php
                     if($product["category_id"]==1){
                         echo "shirt";

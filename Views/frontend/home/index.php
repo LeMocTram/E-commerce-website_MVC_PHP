@@ -41,8 +41,8 @@
     <!-- Modal Auth  -->
     <?php include('Views/frontend/partitions/modalAuth.php');?>
     </div>
-
-    <div class="body-container container-fluid"  style="min-height: 700px;">
+        
+    <div class="body-container container-fluid"  style="min-height: 700px; margin-top:90px;">
         <div id="notify-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
             <div class="toast-header">
                 <strong id="notify" class="me-auto"></strong>
@@ -50,7 +50,6 @@
             </div>
         </div>
        <?php 
-        // echo $_SERVER['REQUEST_URI'];
         if(!isset($_GET['action'])){
             include 'Views/frontend/home/homePage.php';
         }else{

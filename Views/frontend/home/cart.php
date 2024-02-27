@@ -1,9 +1,11 @@
-<ul class="dir-cart">
+
+<div class="container">
+    <ul class="dir-cart">
     <li class="dir-name"><a href="#">ClothesForBoy</a></li>
     <li class="dir-name">/</li>
     <li class="dir-name"><a href="#">Đơn đặt hàng</a></li>
 </ul>
-
+</div>
 <form method="post" action="?controller=home&action=order">
     <div class="container container-detail-card">
         <div class="col-lg-6 col-md-12 col-sm-12" id="cart-col-left">
@@ -49,7 +51,7 @@
                 <legend>Hình thức thanh toán</legend>
                 <div class="col-md-8 payment-methods">
                     <div class="cod-method">
-                        <input type="radio" id="cod" name="method" value="cod">
+                        <input type="radio" id="cod" name="method" value="cod" checked>
                         <label for="cod">COD</label>
                     </div>
                     <div class="cash-method">
@@ -166,7 +168,7 @@
 
             // Tạo phần tử td cho tổng
             var tdTotal = document.createElement("td");
-            tdTotal.textContent = totalPrice.toFixed(3);
+            tdTotal.textContent = totalPrice;
             tr.appendChild(tdTotal);
 
             // Tạo phần tử td cho nút xóa
@@ -182,9 +184,9 @@
             tbody.appendChild(tr);
             totalAll += totalPrice;
         });
-        document.getElementById('totalBill').value = totalAll.toFixed(3);
-        document.getElementById('sumTotal').innerHTML = totalAll.toFixed(3);
-        document.getElementById('sumTotalBill').innerHTML = totalAll.toFixed(3);
+        document.getElementById('totalBill').value = totalAll;
+        document.getElementById('sumTotal').innerHTML = totalAll;
+        document.getElementById('sumTotalBill').innerHTML = totalAll;
         
         
     } else {

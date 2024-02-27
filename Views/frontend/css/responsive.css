@@ -2,6 +2,9 @@
         .menu-list{
                 display: none;
         }
+        .img-fluid{
+                min-height: 456px;
+        }
 }
 
 @media (min-width: 46.25em) and (max-width:63.9375em) {
@@ -30,6 +33,9 @@
         .form-group input,
         .form-group textarea{
                 margin: 0 12px;
+        }
+        .img-fluid{
+                height: 321px;
         }
 }
 
@@ -76,7 +82,9 @@
                 }
         }
 
-
+        .img-fluid{
+                height: 546px;
+        }
 
     /* CART */
         .body-container .container-detail-card{

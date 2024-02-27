@@ -6,7 +6,7 @@
                     <label class="auth-form-heading">
                         Đăng ký
                     </label>
-                    <span id="btn-close-form-register">x</span>
+                    <span id="btn-close-form-register"><i class="fa-solid fa-xmark"></i></span>
                 </div>
                 <form class="auth-form-body" action="?controller=home&action=register" method="post">
                     <input name="registered-name" type="text" placeholder="Name" required>
@@ -32,7 +32,7 @@
                     <label class="auth-form-heading">
                         Đăng nhập
                     </label>
-                    <span id="btn-close-form-login">x</span>
+                    <span id="btn-close-form-login"><i class="fa-solid fa-xmark"></i></span>
                 </div>
                 <form class="auth-form-body" action="?controller=home&action=auth" method="post">
                     <input name="eCustomer" type="email" placeholder="Email" required>

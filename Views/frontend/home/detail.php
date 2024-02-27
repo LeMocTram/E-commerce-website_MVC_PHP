@@ -1,26 +1,28 @@
 <div class="dir-product">
      <div class="col-md-12">
-        <ul style="display:flex; ">
-            <li class="dir-name"><a href="?controller=home">ClothesForBoy</a></li>
-            <li class="dir-name">/</li>
-            <li class="dir-name">
-                <a href="?controller=home&action=show&category_id=<?php echo $productDetail['category_id']?>">
-                    <?php
-                        if ($productDetail['category_id']==='1') {
-                            echo "ÁO NAM";
-                        }elseif ($productDetail['category_id']==='2') {
-                            echo "QUẦN NAM";
-                        }elseif ($productDetail['category_id']==='3') {
-                            echo "GIÀY DÉP";
-                        }else{
-                            echo "PHỤ KIỆN";
-                        }
-                    ?>
-                </a>
-            </li>
-            <li class="dir-name">/</li>
-            <li class="dir-name"><a href="#"><?php echo $productDetail['name']?></a></li>
-        </ul>
+        <div class="container">
+            <ul style="display:flex; ">
+                <li class="dir-name"><a href="?controller=home">ClothesForBoy</a></li>
+                <li class="dir-name">/</li>
+                <li class="dir-name">
+                    <a href="?controller=home&action=show&category_id=<?php echo $productDetail['category_id']?>">
+                        <?php
+                            if ($productDetail['category_id']==='1') {
+                                echo "ÁO NAM";
+                            }elseif ($productDetail['category_id']==='2') {
+                                echo "QUẦN NAM";
+                            }elseif ($productDetail['category_id']==='3') {
+                                echo "GIÀY DÉP";
+                            }else{
+                                echo "PHỤ KIỆN";
+                            }
+                        ?>
+                    </a>
+                </li>
+                <li class="dir-name">/</li>
+                <li class="dir-name"><a href="#"><?php echo $productDetail['name']?></a></li>
+            </ul>
+        </div>
     </div>
 <?php 
 if(isset($productDetail)){

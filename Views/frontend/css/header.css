@@ -89,6 +89,7 @@
     min-width: 32px;
     height: 32px;
     display: flex;
+    justify-content: space-between;
     i{
         margin: auto;
         font-size: 1rem;
@@ -143,7 +144,7 @@
     top: 110%;
     display: none;
     transition: .4s;
-    z-index: 2;
+    z-index: 5;
     height: 465px;
     overflow: auto;
     overflow-x: hidden !important;
