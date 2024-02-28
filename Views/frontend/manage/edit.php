@@ -32,14 +32,14 @@ if (!myToken) {
                 <label for="productPrice">Price:</label>
                 <input type="text"  name="price" value="<?php echo $products['price'];?>" autocomplete="off">
 
-                <label for="productPrice">Category:</label><br>
-                <input type="radio"  name="category_id" checked value="1">
+                <label for="categoryId">Category:</label><br>
+                <input type="radio" name="category_id" <?php if($products['category_id'] == 1) echo "checked"; ?> value="1">
                 <label for="shirt">Shirt</label><br>
-                <input type="radio"  name="category_id" value="2">
+                <input type="radio" name="category_id" <?php if($products['category_id'] == 2) echo "checked"; ?> value="2">
                 <label for="pants">Pants</label><br>
-                <input type="radio"  name="category_id" value="3">
+                <input type="radio" name="category_id" <?php if($products['category_id'] == 3) echo "checked"; ?> value="3">
                 <label for="shoes">Shoes</label><br>
-                <input type="radio"  name="category_id" value="4">
+                <input type="radio" name="category_id" <?php if($products['category_id'] == 4) echo "checked"; ?> value="4">
                 <label for="accessory">Accessory</label><br>
                 <input type="submit" value="Update Product">
             </form>

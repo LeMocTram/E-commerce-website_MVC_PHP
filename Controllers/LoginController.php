@@ -1,3 +1,4 @@
+ 
  <?php
 require_once 'vendor/autoload.php';
 
@@ -18,20 +19,24 @@ class LoginController extends BaseController{
 
         public function index(){
             // echo __METHOD__;
+            // die;
             return $this->loadView('frontend.manage.login');// trỏ tới view  required
         }
 
         public function login(){
+            // echo __METHOD__;
+            // die;
             if(isset($_POST['submit'])){
                 $username= $_POST["username"];
                 $password_input=$_POST["password"];
+                
                 if(empty($_POST["username"])||empty($_POST["password"])){
-                    $adminLoginFalse="adminLoginFalse";
-                    echo "<script>";
-                    echo "localStorage.setItem('adminLoginFalse', '" . $adminLoginFalse . "');";
-                    echo "</script>";
-                    echo "<script>location.href = '?controller=login';</script>";
-                    exit();
+                    // $adminLoginFalse="adminLoginFalse";
+                    // echo "<script>";
+                    // echo "localStorage.setItem('adminLoginFalse', '" . $adminLoginFalse . "');";
+                    // echo "</script>";
+                    // echo "<script>location.href = '?controller=login';</script>";
+                      
                 }
                 $result = $this->loginModel->login($username);
                 if( mysqli_num_rows($result)>0){

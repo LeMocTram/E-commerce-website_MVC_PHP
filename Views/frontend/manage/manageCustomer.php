@@ -7,7 +7,7 @@ if (!myToken) {
     window.location.href = '?controller=login&action=logout';
 }
 </script>
- <h1 style="text-align: center; margin-bottom:100px; ">MANAGE CUSTOMER ACCOUNTS</h1>
+ <h1 style="text-align: center; margin-bottom:100px; ">MANAGE ACCOUNT CUSTOMERS</h1>
 
 <table>
     <thead>

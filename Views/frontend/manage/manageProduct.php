@@ -1,4 +1,4 @@
- <h1 style="text-align: center; margin-bottom:100px;">PRODUCT MANAGEMENT</h1>
+ <h1 style="text-align: center; margin-bottom:100px;">MANAGE PRODUCTS</h1>
 
 <div class="wrapper-btn-add ">
     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">

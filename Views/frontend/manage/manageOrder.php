@@ -9,7 +9,7 @@ if (!myToken) {
 
 </script>
 
- <h1 style="text-align: center; margin-bottom:100px;">ORDER MANAGEMENT</h1>
+ <h1 style="text-align: center; margin-bottom:100px;">MANAGE ORDERS</h1>
 
 
  <table>

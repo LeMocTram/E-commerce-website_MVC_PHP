@@ -21,16 +21,16 @@ class DashboardController extends BaseController {
             }
 
         public function index(){
-            if(!isset($_GET['category_id'])){
-                $selectColumn=['id','name','image','price','category_id'];
-                $order=['column'=>'id','order'=>'asc'];
-                $product =  $this->productModel->getAllProducts($selectColumn,$order);
-            }else{
-                $category_id=$_GET['category_id'];
-                $product =  $this->productModel->findProductByCategoryId($category_id);
-            }
+            // if(!isset($_GET['category_id'])){
+            //     $selectColumn=['id','name','image','price','category_id'];
+            //     $order=['column'=>'id','order'=>'asc'];
+            //     $product =  $this->productModel->getAllProducts($selectColumn,$order);
+            // }else{
+            //     $category_id=$_GET['category_id'];
+            //     $product =  $this->productModel->findProductByCategoryId($category_id);
+            // }
             
-            return $this->loadView('frontend.manage.dashboard',['products'=>$product]);
+            return $this->loadView('frontend.manage.dashboard');
         }
        
 
