@@ -46,16 +46,30 @@ class DashboardController extends BaseController {
         ];
             $this->productModel->store($data);
             // header('Location: ');
-            echo "<script>location.href = '?controller=dashboard';</script>";
+            echo "<script>location.href = '?controller=dashboard&table=products';</script>";
 
         }
         public function delete(){
             $id=$_GET['id'];
-            $this->productModel->deleteProduct($id);
-            // header('Location: ?controller=dashboard');
-            echo "<script>location.href = '?controller=dashboard';</script>";
+            $data = [
+                'deleted' => true
+            ];
+            $this -> productModel->tranferToTrash($id,$data);
+            echo "<script>location.href = '?controller=dashboard&table=products';</script>";
 
         }
+        public function restore(){
+            $id=$_GET['id'];
+            $data = [
+                'deleted' => false
+            ];
+            $this -> productModel->restoreProduct($id,$data);
+            echo "<script>location.href = '?controller=dashboard&table=trash';</script>";
+
+        }
+        
+
+
         public function edit(){
             $id=$_GET['id'];
            $product= $this->productModel->findProductById($id);

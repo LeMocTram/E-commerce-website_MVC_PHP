@@ -31,12 +31,6 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -63,7 +57,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="?controller=dashboard" class="brand-link">
       <img src="app/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Dashboard</span>
     </a>
@@ -107,19 +101,19 @@
             </a>
             <ul class="nav nav-treeview" style="display: none;">
               <li class="nav-item">
-                <a href="?controller=dashboard" class="nav-link">
+                <a href="?controller=dashboard&table=products" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Products</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?controller=dashboard&table=orders" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Orders</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?controller=dashboard&table=customers" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Customers</p>
                 </a>
@@ -136,66 +130,60 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <!-- <section class="content-header">
+    <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Pace</h1>
+            <h1><?php
+              if(isset($_GET['table'])){
+                echo  ucwords($_GET['table']);
+              }
+            ?></h1>
           </div>
-          <div class="col-sm-6">
+          <!-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Pace</li>
             </ol>
-          </div>
+          </div> -->
         </div>
       </div>
-    </section> -->
+    </section>
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-            <div class="col-12">
-                <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Product list</h2>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Product Name</th>
-                        <th>Product Image</th>
-                        <th>Product Price</th>
-                        <th>Product Category</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    
-                    <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Product Name</th>
-                        <th>Product Image</th>
-                        <th>Product Price</th>
-                        <th>Product Category</th>
-                        <th>Action</th>
-                    </tr>
-                    </tfoot>
-                    </table>
-                </div>
-                <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <!-- /.col -->
-            </div>
-            <!-- /.row -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+              <div class="card">
+              <?php 
+               
+                if(!isset($_GET['table'])){
+                  echo '';
+                }else{
+                  if((isset($_GET['table']) && ($_GET['table']==='products'))){
+                  include 'Views/frontend/manage/tableProducts.php';
+                  }elseif(isset($_GET['table']) && ($_GET['table']==='orders')){
+                    include 'Views/frontend/manage/tableOrders.php';
+                  }elseif(isset($_GET['table']) && ($_GET['table']==='customers')){
+                    include 'Views/frontend/manage/tableCustomers.php';
+                  }elseif(isset($_GET['table']) && ($_GET['table']==='trash')){
+                    include 'Views/frontend/manage/tableTrash.php';
+                  }
+                }
+              ?>
+              
+              <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+          </div>
+          <!-- /.col -->
         </div>
-    </section>
+          <!-- /.row -->
+      </div>
+  </section>
+   
+  
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -252,33 +240,97 @@
 
     // TABLEDATAS
   $(function () {
-    $("#example1").DataTable({
-      "responsive": true, 
-      "lengthChange": false, 
-      "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-      "ajax": 'sever_processing.php',
-      "processing": true,
-      "serverSide": true
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    // $('#example2').DataTable({
-    //   "paging": true,
-    //   "lengthChange": false,
-    //   "searching": false,
-    //   "ordering": true,
-    //   "info": true,
-    //   "autoWidth": false,
-    //   "responsive": true,
-    // });
+      // Kiểm tra tham số trên URL để xác định bảng nào sẽ được hiển thị
+      var params = new URLSearchParams(window.location.search);
+      var controller = params.get('controller');
+      var table = params.get('table');
+
+      if (controller === 'dashboard') {
+        if (table === 'products' ) {
+            // Nếu table không được xác định hoặc table là 'products', chạy DataTable #example1
+            $('#tableProduct').DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "ajax": {
+                    url: 'processSeverSide/sever_processing_products.php', // Thay đổi đường dẫn nếu cần
+                    type: 'GET', // hoặc 'GET', phụ thuộc vào yêu cầu của bạn
+                    // data: function (d) {
+                    //     // Thêm dữ liệu yêu cầu nếu cần
+                    // },
+                    // success: function (response) {
+                    //     console.log(response); // In ra giá trị trả về từ server
+                    // }
+                }, // Thay đổi đường dẫn nếu cần
+                "processing": true,
+                "serverSide": true,
+                 "language": {
+                    // "emptyTable": "Hello",
+                     "zeroRecords": "There are no products, please add a new one"
+                }
+            });
+        };
+        if (table === 'trash' ) {
+            // Nếu table không được xác định hoặc table là 'products', chạy DataTable #example1
+            $('#tableTrash').DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "ajax": {
+                    url: 'processSeverSide/sever_processing_trash.php', // Thay đổi đường dẫn nếu cần
+                    type: 'GET', // hoặc 'GET', phụ thuộc vào yêu cầu của bạn
+                }, 
+                "processing": true,
+                "serverSide": true,
+                 "language": {
+                    // "emptyTable": "Hello",
+                     "zeroRecords": "Empty Trash return <a href='?controller=dashboard&table=products'>here</a>"
+                }
+            });
+        };
+
+        if (table === 'customers' ) {
+          $('#tableCustomer').DataTable({
+              "responsive": true,
+              "lengthChange": false,
+              "autoWidth": false,
+              "ajax": {
+                  url: 'processSeverSide/sever_processing_customers.php', 
+                
+              }, 
+              "processing": true,
+              "serverSide": true,
+              
+          });
+        };
+
+        if (table === 'orders' ) {
+          $('#tableOrder').DataTable({
+              "responsive": true,
+              "lengthChange": false,
+              "autoWidth": false,
+              "ajax": {
+                  url: 'processSeverSide/sever_processing_orders.php', 
+                  type: 'GET', // hoặc 'GET', phụ thuộc vào yêu cầu của bạn
+                  
+              }, 
+              "processing": true,
+              "serverSide": true,
+              
+          });
+        };
+      }
   });
+
+
 
     // LOG OUT
     document.getElementById('logoutBtn').addEventListener('click', function () {
-    // Xóa dữ liệu từ localStorage
-    localStorage.removeItem('token'); // Thay 'myVariable' bằng tên của biến bạn muốn xóa
-    // Hoặc sử dụng localStorage.clear(); nếu bạn muốn xóa toàn bộ dữ liệu từ localStorage
-    window.location.href = '?controller=login&action=logout';
-});
+      // Xóa dữ liệu từ localStorage
+      localStorage.removeItem('token'); // Thay 'myVariable' bằng tên của biến bạn muốn xóa
+      // Hoặc sử dụng localStorage.clear(); nếu bạn muốn xóa toàn bộ dữ liệu từ localStorage
+      window.location.href = '?controller=login&action=logout';
+    });
 
 </script>
 </body>

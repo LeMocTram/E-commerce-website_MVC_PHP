@@ -17,8 +17,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Easy set variables
  */
- 
-// DB table to use
+          // DB table to use
 $table = 'products';
  
 // Table's primary key
@@ -68,12 +67,11 @@ $columns = array(
         'db' => 'id',
         'dt' => 5,
         'formatter' => function($d, $row) {
-            return '<a style="color:black; margin-right: 5px;" href="?controller=dashboard&action=edit&id=' . $row['id'] . '" title="Edit" type="button">' .
-                '<i class="fa-solid fa-pen-to-square"></i>' .
-            '</a>' .
-            '<a onclick="return confirm(\'You want delete this product?\')" style="color:red;" title="Delete" type="button" href="?controller=dashboard&action=delete&id=' . $row['id'] . '">' .
-                '<i class="fa-solid fa-trash"></i>' .
-            '</a>';
+            return
+            '<a class="btn btn-block btn-success"  title="Delete" type="button" href="?controller=dashboard&action=restore&id=' . $row['id'] . '">
+                Restore
+            </a>'
+            ;
         }
     )
 );
@@ -87,14 +85,13 @@ $sql_details = array(
     // ,'charset' => 'utf8' // Depending on your PHP and MySQL config, you may need this
 );
  
- 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * If you just want to use the basic configuration for DataTables with PHP
  * server-side, there is no need to edit below this line.
  */
- 
 require( 'ssp.class.php' );
  
 echo json_encode(
-    SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
+    SSP::product_trash( $_GET, $sql_details, $table, $primaryKey, $columns )
 );
+?>

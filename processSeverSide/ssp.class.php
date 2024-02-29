@@ -246,6 +246,120 @@ class SSP {
 	 *  @param  array $columns Column information array
 	 *  @return array          Server-side processing response array
 	 */
+
+
+	// Viết thêm để lấy những sản phẩm có trường deleted=0
+	static function simple_deleted_zero( $request, $conn, $table, $primaryKey, $columns )
+	{
+		$bindings = array();
+		$db = self::db( $conn );
+
+		// Build the SQL query string from the request
+		$limit = self::limit( $request, $columns );
+		$order = self::order( $request, $columns );
+		$where = self::filter( $request, $columns, $bindings );
+
+		// Add condition for deleted = 0
+		if (!empty($where)) {
+			$where .= " AND `deleted` = 0";
+		} else {
+			$where = " WHERE `deleted` = 0";
+		}
+
+		// Main query to actually get the data
+		$data = self::sql_exec( $db, $bindings,
+			"SELECT `".implode("`, `", self::pluck($columns, 'db'))."`
+			FROM `$table`
+			$where
+			$order
+			$limit"
+		);
+
+		// Data set length after filtering
+		$resFilterLength = self::sql_exec( $db, $bindings,
+			"SELECT COUNT(`{$primaryKey}`)
+			FROM   `$table`
+			$where"
+		);
+		$recordsFiltered = $resFilterLength[0][0];
+
+		// Total data set length
+		$resTotalLength = self::sql_exec( $db,
+			"SELECT COUNT(`{$primaryKey}`)
+			FROM   `$table`"
+		);
+		$recordsTotal = $resTotalLength[0][0];
+
+		/*
+		* Output
+		*/
+		return array(
+			"draw"            => isset ( $request['draw'] ) ?
+				intval( $request['draw'] ) :
+				0,
+			"recordsTotal"    => intval( $recordsTotal ),
+			"recordsFiltered" => intval( $recordsFiltered ),
+			"data"            => self::data_output( $columns, $data )
+		);
+	}
+
+	// Thùng rác 
+	static function product_trash( $request, $conn, $table, $primaryKey, $columns )
+	{
+		$bindings = array();
+		$db = self::db( $conn );
+
+		// Build the SQL query string from the request
+		$limit = self::limit( $request, $columns );
+		$order = self::order( $request, $columns );
+		$where = self::filter( $request, $columns, $bindings );
+
+		// Add condition for deleted = 0
+		if (!empty($where)) {
+			$where .= " AND `deleted` = 1";
+		} else {
+			$where = " WHERE `deleted` = 1";
+		}
+
+		// Main query to actually get the data
+		$data = self::sql_exec( $db, $bindings,
+			"SELECT `".implode("`, `", self::pluck($columns, 'db'))."`
+			FROM `$table`
+			$where
+			$order
+			$limit"
+		);
+
+		// Data set length after filtering
+		$resFilterLength = self::sql_exec( $db, $bindings,
+			"SELECT COUNT(`{$primaryKey}`)
+			FROM   `$table`
+			$where"
+		);
+		$recordsFiltered = $resFilterLength[0][0];
+
+		// Total data set length
+		$resTotalLength = self::sql_exec( $db,
+			"SELECT COUNT(`{$primaryKey}`)
+			FROM   `$table`"
+		);
+		$recordsTotal = $resTotalLength[0][0];
+
+		/*
+		* Output
+		*/
+		return array(
+			"draw"            => isset ( $request['draw'] ) ?
+				intval( $request['draw'] ) :
+				0,
+			"recordsTotal"    => intval( $recordsTotal ),
+			"recordsFiltered" => intval( $recordsFiltered ),
+			"data"            => self::data_output( $columns, $data )
+		);
+	}
+
+
+
 	static function simple ( $request, $conn, $table, $primaryKey, $columns )
 	{
 		$bindings = array();

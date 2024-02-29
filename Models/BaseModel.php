@@ -10,30 +10,25 @@ class BaseModel extends Database {
     }
 
     //read data //
-    public function getAllData($table,$select=['*'] ,$orderBy=[],){
-        $orderByString=implode(' ',$orderBy);
-        $column= implode(',',$select);
-        if($orderByString){
-            $sql = "SELECT ${column} FROM ${table} ORDER BY ${orderByString}";
-            // die($sql);
+    public function getAllData($table, $select = ['*'], $orderBy = []) {
+        $orderByString = implode(' ', $orderBy);
+        $column = implode(',', $select);
 
-            
-        }else{
-            $sql = "SELECT ${column} FROM ${table} ";
-            die($sql);
+        if ($orderByString) {
+            $sql = "SELECT ${column} FROM ${table} WHERE deleted = 0 ORDER BY ${orderByString}";
+        } else {
+            $sql = "SELECT ${column} FROM ${table} WHERE deleted = 0";
         }
 
-        // echo $sql;
-        // die;
         $query = $this->_query($sql);
-        $data=[];
-        //Mỗi lần lấy ra được 1 bản ghi thông qua câu lệnh mysqli_fetch_assoc($query)
-        while($row = mysqli_fetch_assoc($query)){
-            array_push($data,$row);
+        $data = [];
+
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
         }
         return $data;
-       
     }
+
     //findbyid
     public function findByCategoryId($table,$category_id){
         $sql= "SELECT * FROM ${table} WHERE category_id = ${category_id}";
@@ -75,10 +70,11 @@ class BaseModel extends Database {
         }
         $newData=implode(",",$dataSets);
         $sql = "UPDATE ${table} SET ${newData} WHERE id = ${id}";
+        // echo $sql; 
+        // die;
         $this->_query($sql);
-
-
     }
+
     //Delete data
     public function delete($table,$id){
 
