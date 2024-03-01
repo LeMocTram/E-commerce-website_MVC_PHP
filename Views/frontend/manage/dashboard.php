@@ -74,18 +74,6 @@
         </div>
       </div>
 
-      <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -169,6 +157,8 @@
                     include 'Views/frontend/manage/tableCustomers.php';
                   }elseif(isset($_GET['table']) && ($_GET['table']==='trash')){
                     include 'Views/frontend/manage/tableTrash.php';
+                  }elseif(isset($_GET['table']) && ($_GET['table']==='orderDetail')){
+                    include 'Views/frontend/manage/tableDetailOrders.php';
                   }
                 }
               ?>
@@ -224,9 +214,12 @@
 <!-- AdminLTE App -->
 <script src="app/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="app/dist/js/demo.js"></script>
+<!-- <script src="app/dist/js/demo.js"></script> -->
 <!-- Page specific script -->
 <script>
+
+    
+
 
     // Auth login
     var myToken = localStorage.getItem('token');
@@ -253,7 +246,7 @@
                 "lengthChange": false,
                 "autoWidth": false,
                 "ajax": {
-                    url: 'processSeverSide/sever_processing_products.php', // Thay đổi đường dẫn nếu cần
+                    url: 'processServerSide/server_processing_products.php', // Thay đổi đường dẫn nếu cần
                     type: 'GET', // hoặc 'GET', phụ thuộc vào yêu cầu của bạn
                     // data: function (d) {
                     //     // Thêm dữ liệu yêu cầu nếu cần
@@ -269,6 +262,8 @@
                      "zeroRecords": "There are no products, please add a new one"
                 }
             });
+         
+            
         };
         if (table === 'trash' ) {
             // Nếu table không được xác định hoặc table là 'products', chạy DataTable #example1
@@ -277,7 +272,7 @@
                 "lengthChange": false,
                 "autoWidth": false,
                 "ajax": {
-                    url: 'processSeverSide/sever_processing_trash.php', // Thay đổi đường dẫn nếu cần
+                    url: 'processServerSide/server_processing_trash.php', // Thay đổi đường dẫn nếu cần
                     type: 'GET', // hoặc 'GET', phụ thuộc vào yêu cầu của bạn
                 }, 
                 "processing": true,
@@ -295,7 +290,7 @@
               "lengthChange": false,
               "autoWidth": false,
               "ajax": {
-                  url: 'processSeverSide/sever_processing_customers.php', 
+                  url: 'processServerSide/server_processing_customers.php', 
                 
               }, 
               "processing": true,
@@ -310,7 +305,22 @@
               "lengthChange": false,
               "autoWidth": false,
               "ajax": {
-                  url: 'processSeverSide/sever_processing_orders.php', 
+                  url: 'processServerSide/server_processing_orders.php', 
+                  type: 'GET', // hoặc 'GET', phụ thuộc vào yêu cầu của bạn
+                  
+              }, 
+              "processing": true,
+              "serverSide": true,
+              
+          });
+        };
+        if (table === 'orderDetail' ) {
+          $('#tableOrderDetail').DataTable({
+              "responsive": true,
+              "lengthChange": false,
+              "autoWidth": false,
+              "ajax": {
+                  url: 'processServerSide/server_processing_orderDetails.php', 
                   type: 'GET', // hoặc 'GET', phụ thuộc vào yêu cầu của bạn
                   
               }, 
@@ -331,6 +341,41 @@
       // Hoặc sử dụng localStorage.clear(); nếu bạn muốn xóa toàn bộ dữ liệu từ localStorage
       window.location.href = '?controller=login&action=logout';
     });
+
+    $(document).ready(function() {
+        $('body').on('click', '.edit-product', function() {
+          var rowData = $(this).closest('tr');
+          var data = $('#tableProduct').DataTable().row(rowData).data();
+          if (data) {
+            console.log(data);
+            // Dữ liệu đã được lấy thành công, bạn có thể làm gì đó với nó ở đây
+            $('#idProduct').val(data[0]); 
+            $('#productName').val(data[1]); 
+            $('#divImg').html(data[2]);
+            // $('#selectCategory').val(data[4]);
+            var priceWithoutSymbol = data[3].replace(/[₫,]/g, '');
+            $('#productPrice').val( parseInt(priceWithoutSymbol));
+
+            var select = document.getElementById("chooseCategory"); // Lấy thẻ select
+            // console.log(select.options.length);
+            for (var i = 0; i < select.options.length; i++) {
+              var optionText = select.options[i].innerText; // hoặc options[i].textContent;
+              // console.log(optionText);
+              if(optionText===data[4]){
+                select.options[i].selected = true;
+                break;
+              }
+            }
+           
+          } else {
+            // Không có dữ liệu trong dòng được click
+            console.log("No data available for the clicked row.");
+          }
+            $("#modal-edit-product").modal();
+        });
+    });
+
+    
 
 </script>
 </body>

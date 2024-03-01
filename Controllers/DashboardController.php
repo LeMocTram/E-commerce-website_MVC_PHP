@@ -78,7 +78,7 @@ class DashboardController extends BaseController {
         }
 
         public function update(){
-            $id=$_GET['id'];
+            $id=$_POST['idProduct'];
             if($_FILES["image"]["tmp_name"]===""){
                 $data = [
                     'name'=> $_POST["name"],
@@ -96,9 +96,7 @@ class DashboardController extends BaseController {
 
             }
             $this->productModel->updateData($id,$data);
-            echo "<script>location.href = '?controller=dashboard';</script>";
-            // header('Location: ?controller=dashboard');
-            
+            echo "<script>location.href = '?controller=dashboard&table=products';</script>";
         }
         public function manageOders(){
             $selectColumn=['*'];

@@ -25,12 +25,14 @@ class ProductModel extends BaseModel{
     }
 
     public function findProductByCategoryId($category_id){
-        return $this->findByCategoryId(self::TABLE,$category_id);
-        
+        return $this->findByCategoryId(self::TABLE,$category_id); 
     }
     public function findProductById($id){
         return $this->findById(self::TABLE,$id);
-        
+    }
+
+    public function checkProductExit($id){
+        return $this->checkProductById(self::TABLE,$id);
     }
     
 

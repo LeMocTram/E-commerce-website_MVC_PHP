@@ -67,8 +67,9 @@ $columns = array(
         'db' => 'id',
         'dt' => 5,
         'formatter' => function($d, $row) {
-            return '<a style="color:black; margin-right: 5px;" href="?controller=dashboard&action=edit&id=' . $row['id'] . '" title="Edit" type="button">' .
-                '<i class="fa-solid fa-pen-to-square"></i>' .
+            // href="?controller=dashboard&action=edit&id=' . $row['id'] . '"
+            return '<a style="color:black; margin-right: 5px;" data-toggle="modal" title="Edit" type="button">' .
+                '<i class="fa-solid fa-pen-to-square edit-product"></i>' .
             '</a>' .
             '<a onclick="return confirm(\'You want delete this product?\')" style="color:red;" title="Delete" type="button" href="?controller=dashboard&action=delete&id=' . $row['id'] . '">' .
                 '<i class="fa-solid fa-trash"></i>' .

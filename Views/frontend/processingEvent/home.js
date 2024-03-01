@@ -170,6 +170,17 @@ if (sendOrder === "success") {
 }
 
 
+var idProductNotExsit = localStorage.getItem('idProductNotExsit');
+if (idProductNotExsit) {
+    localStorage.removeItem('cartItem');
+    localStorage.removeItem('idProductNotExsit');
+}
+
+
+
+
+
+
 
 // Gắn sự kiện click vào phần tử "logout"
 document.getElementById('logout').addEventListener('click', logout);

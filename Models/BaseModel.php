@@ -31,7 +31,7 @@ class BaseModel extends Database {
 
     //findbyid
     public function findByCategoryId($table,$category_id){
-        $sql= "SELECT * FROM ${table} WHERE category_id = ${category_id}";
+        $sql= "SELECT * FROM ${table} WHERE category_id = ${category_id} AND deleted = 0"  ;
         // echo $sql;
         $query = $this->_query($sql);
         $data=[];
@@ -148,8 +148,6 @@ class BaseModel extends Database {
             $sql = "INSERT INTO ${table} (${columns}) VALUES (${newValues})";
             $this->_query($sql);
         }
-        // die;
-
     }
 
     public function findByOrderId($table,$id){
@@ -168,7 +166,11 @@ class BaseModel extends Database {
             
     }
 
-
+    public function checkProductById($table,$id){
+        $sql = "SELECT deleted FROM ${table} WHERE id = $id";
+        $query = $this->_query($sql);
+        return  mysqli_fetch_assoc($query);
+    }
 
     private function _query($sql){
        return  mysqli_query($this->connect,$sql);

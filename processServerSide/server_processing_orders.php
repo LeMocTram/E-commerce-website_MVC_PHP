@@ -49,7 +49,7 @@ $columns = array(
        'dt' => 10,
        'formatter' => function($d, $row) {
            return 
-           '<a href="?controller=dashboard&action=detailOrder&id='. $row['id'] .'">
+           '<a href="?controller=dashboard&table=orderDetail&id='. $row['id'] .'">
                 <i class="fa-solid fa-circle-info"></i> 
             </a>'
            ;
@@ -78,6 +78,5 @@ echo json_encode(
     SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
 );
  
-
 
 ?>
